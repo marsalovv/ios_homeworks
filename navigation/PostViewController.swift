@@ -16,20 +16,12 @@ class PostViewController: UIViewController {
         self.view.backgroundColor = .systemCyan
         self.navigationController?.navigationBar.backgroundColor = .green
         self.title = post.title
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tabInfo))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tapInfo))
     }
 
-    @objc func tabInfo() {
-        
+    @objc func tapInfo() {
+        let infoVC = InfoViewController()
+        self.navigationController?.present(infoVC, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

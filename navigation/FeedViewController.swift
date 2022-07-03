@@ -9,7 +9,7 @@ import UIKit
 
 
 class FeedViewController: UIViewController {
-    let button: UIButton = {
+     let button: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Open post", for: .normal)
@@ -24,6 +24,7 @@ class FeedViewController: UIViewController {
         self.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 1)
         self.view.addSubview(button)
         self.navigationController?.navigationBar.backgroundColor = .systemBlue
+
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor   ),
             button.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
@@ -36,11 +37,9 @@ class FeedViewController: UIViewController {
 
 let postVC = PostViewController()
         
-        navigationController?.pushViewController(postVC, animated: true)
+        self.navigationController?.pushViewController(postVC, animated: true)
 
     }
-
-
 
 
 }
