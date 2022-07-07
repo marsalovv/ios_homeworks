@@ -18,8 +18,8 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemPink
         self.view.addSubview(button)
+    
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor   ),
             button.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

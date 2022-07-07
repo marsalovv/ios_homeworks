@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tbvc = UITabBarController()
         let feedNav = UINavigationController(rootViewController: FeedViewController())
         let profileNav = UINavigationController(rootViewController: ProfileViewController())
-        tbvc.viewControllers = [feedNav, profileNav]
+        tbvc.setViewControllers([feedNav, profileNav], animated: true)
         
         window?.rootViewController = tbvc
         window?.makeKeyAndVisible()

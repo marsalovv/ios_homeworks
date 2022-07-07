@@ -24,4 +24,5 @@ class PostViewController: UIViewController {
         self.navigationController?.present(infoVC, animated: true)
     }
 
+    
 }
