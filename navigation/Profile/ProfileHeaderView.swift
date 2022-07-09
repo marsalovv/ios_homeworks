@@ -13,13 +13,13 @@ class ProfileHeaderView: UIView {
         avatar.clipsToBounds = true
         avatar.layer.cornerRadius = avatar.frame.width / 2
         avatar.layer.borderWidth = 3
-        avatar.layer.borderColor = UIColor.black.cgColor
+        avatar.layer.borderColor = UIColor.white.cgColor
         avatar.image = UIImage(named: "avatar.jpg")
         return avatar
     }()
     
     lazy var  nameLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 140, y: 115, width: 140, height: 30))
+        let label = UILabel(frame: CGRect(x: 150, y: 115, width: 140, height: 30))
         label.text = "Angoric"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
@@ -49,7 +49,9 @@ class ProfileHeaderView: UIView {
     }()
     
     @objc func printStatus() {
-        print(status.text)
+        if let text = status.text {
+            print(text)
+        }
     }
     
     override init(frame: CGRect) {
