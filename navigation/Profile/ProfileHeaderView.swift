@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    lazy var avatarImage: UIImageView = {
+    private lazy var avatarImage: UIImageView = {
         let avatar = UIImageView(frame: CGRect(x: 16, y:  104, width: 100, height: 100))
         avatar.clipsToBounds = true
         avatar.layer.cornerRadius = avatar.frame.width / 2
@@ -18,7 +18,7 @@ class ProfileHeaderView: UIView {
         return avatar
     }()
     
-    lazy var  nameLabel: UILabel = {
+    private lazy var  nameLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 150, y: 115, width: 140, height: 30))
         label.text = "Angoric"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -26,7 +26,7 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    lazy var status: UILabel = {
+    private lazy var status: UILabel = {
         let status = UILabel(frame: CGRect(x: 150, y: 156, width: 140, height: 30))
         status.text = "У меня лапки!"
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -34,7 +34,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
     
-    lazy var button :UIButton = {
+    private lazy var button :UIButton = {
         let btn = UIButton(frame: CGRect(x: 16, y: 238, width: 343, height: 50))
         btn.setTitle("Show status", for: .normal)
         btn.backgroundColor = .systemBlue

@@ -8,28 +8,21 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
+    private lazy var profileHV = ProfileHeaderView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(profileHV)
         self.title = "Profile"
         self.view.backgroundColor = .lightGray
-        self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.text.rectangle"), tag: 1)
         
-        //self.navigationController?.navigationBar.backgroundColor = .blue
-
     }
     
-    override func viewWillLayoutSubviews() {
-//        profileHV.frame = self.view.bounds
-        
-    }
-
     override func loadView() {
         super.loadView()
-        let size = self.view.frame
-        let profileHV = ProfileHeaderView(frame: size)
-        self.view.addSubview(profileHV)
+        profileHV = ProfileHeaderView(frame: self.view.frame)
+        
     }
     
     
