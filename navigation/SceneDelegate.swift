@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedNav.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 1)
         let profileNav = UINavigationController(rootViewController: ProfileViewController())
         profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.text.rectangle"), tag: 1)
-        tbvc.setViewControllers([feedNav, profileNav], animated: true)
+        tbvc.setViewControllers([feedNav, profileNav,], animated: true)
         
         window?.rootViewController = tbvc
         window?.makeKeyAndVisible()
