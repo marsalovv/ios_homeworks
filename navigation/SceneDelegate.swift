@@ -17,13 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         let tbvc = UITabBarController()
         let feedNav = UINavigationController(rootViewController: FeedViewController())
+        feedNav.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 1)
         let profileNav = UINavigationController(rootViewController: ProfileViewController())
-        tbvc.viewControllers = [feedNav, profileNav]
+        profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.text.rectangle"), tag: 1)
+        tbvc.setViewControllers([feedNav, profileNav,], animated: true)
         
         window?.rootViewController = tbvc
         window?.makeKeyAndVisible()
+        
     }
-
-
+    
+    
 }
 

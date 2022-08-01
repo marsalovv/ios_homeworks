@@ -21,7 +21,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Feed"
         self.view.backgroundColor = .brown
-        self.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 1)
         self.view.addSubview(button)
         self.navigationController?.navigationBar.backgroundColor = .systemBlue
 
