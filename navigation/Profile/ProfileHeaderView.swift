@@ -107,7 +107,7 @@ class ProfileHeaderView: UIView {
             
             //nameLabel.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 30.0 ),
             nameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15.0),
-
+            
             statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -8.0),
             statusLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15.0),
             
@@ -119,7 +119,7 @@ class ProfileHeaderView: UIView {
             button.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor, constant: 16.0),
             button.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16.0),
             button.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 34.0),
-            button.heightAnchor.constraint(equalToConstant: 50.0)
+            button.heightAnchor.constraint(equalToConstant: 50.0),
         ])
     }
     
