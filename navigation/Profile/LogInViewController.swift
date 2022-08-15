@@ -6,6 +6,8 @@ class LogInViewController: UIViewController {
 
 //MARK: -Data
     
+private    let notificationCenter = NotificationCenter.default
+    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.showsVerticalScrollIndicator = true
@@ -28,8 +30,16 @@ class LogInViewController: UIViewController {
         let button = UIButton()
         let colorButton = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
         button.setTitle("Log In", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = colorButton
+        button.backgroundColor?.withAlphaComponent(1)
+        
+        if button.isSelected || button.isHighlighted || button.isEnabled == false {
+            button.backgroundColor?.withAlphaComponent(0.8)
+            }
+
+        button.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -50,8 +60,8 @@ class LogInViewController: UIViewController {
         email.textColor = .black
         email.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         email.autocapitalizationType = .none
-        email.backgroundColor = .lightGray
         email.keyboardType = .emailAddress
+        email.delegate = self
         email.translatesAutoresizingMaskIntoConstraints = false
         
         return email
@@ -63,7 +73,7 @@ class LogInViewController: UIViewController {
         password.textColor = .black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.isSecureTextEntry = true
-        password.backgroundColor = .lightGray
+        password.delegate = self
         password.translatesAutoresizingMaskIntoConstraints = false
         
         return password
@@ -78,7 +88,7 @@ class LogInViewController: UIViewController {
         stackView.layer.cornerRadius = 10
         stackView.backgroundColor = .lightGray
         stackView.clipsToBounds = true
-        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderColor = UIColor.black.cgColor
         stackView.addArrangedSubview(email)
         stackView.addArrangedSubview(password)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,12 +100,21 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navigationController?.navigationBar.isHidden = true
         addSubViews()
         setupConstrains()
-
-        logInButton.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil) // - клавиатура показана на экране
+        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil) // - клавиатура спрятана
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
         //MARK: -Private
@@ -125,7 +144,7 @@ class LogInViewController: UIViewController {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: logInButton.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
         
@@ -143,8 +162,8 @@ class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50)
-                                        
+            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
     }
@@ -152,6 +171,26 @@ class LogInViewController: UIViewController {
     @objc func buttonPress() {
         let profileNavv = ProfileViewController()
         self.navigationController?.pushViewController(profileNavv, animated: true)
+
+    }
+    
+    @objc private func keyboardShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = keyboardSize.height
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        }
+    }
+    
+    @objc private func keyboardHide() {
+        scrollView.contentInset = .zero
+        scrollView.verticalScrollIndicatorInsets = .zero
+    }
+
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+ true
     }
     
 }
