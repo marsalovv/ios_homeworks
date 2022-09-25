@@ -1,13 +1,7 @@
-//
-//  ProfileHeaderView.swift
-//  navigation
-//
-//  Created by Сергей Марсалов on 05.07.2022.
-//
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var avatarImage: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "avatar.jpg")
@@ -77,13 +71,17 @@ class ProfileHeaderView: UIView {
             print(text)
         }
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: nil)
         setupView()
         setupConstrains()
     }
-    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupView()
+//        setupConstrains()
+//    }
+//
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

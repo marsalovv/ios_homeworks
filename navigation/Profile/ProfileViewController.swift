@@ -1,13 +1,12 @@
-//
-//  ProfileViewController.swift
-//  navigation
-//
-//  Created by Сергей Марсалов on 29.06.2022.
-//
+
 
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    //MARK: - Data
+    
+    let postsArray = Post.getPostsArray()
     private lazy var profileHV: ProfileHeaderView = {
         let profileHV = ProfileHeaderView()
         profileHV.translatesAutoresizingMaskIntoConstraints = false
@@ -15,42 +14,65 @@ class ProfileViewController: UIViewController {
         return profileHV
     }()
     
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("изменить title", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.backgroundColor = .gray
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        return tableView
     }()
+    
+    //MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(profileHV)
-        setupView()
+        self.view.addSubview(tableView)
+
         setupConstrains()
     }
     
-    override func loadView() {
-        super.loadView()
-    }
+    //MARK: - Private
     
-    func setupView() {
-        self.title = "Profile"
-        self.view.backgroundColor = .lightGray
-        self.view.addSubview(button)
-    }
-    
-    func setupConstrains() {
+    private func setupConstrains() {
         let safeArie = self.view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            profileHV.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor, constant: 0),
-            profileHV.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: 0),
-            profileHV.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 0),
-            profileHV.heightAnchor.constraint(equalToConstant: 220),
-            
-            button.leftAnchor.constraint(equalTo: safeArie.leftAnchor),
-            button.rightAnchor.constraint(equalTo: safeArie.rightAnchor),
-            button.bottomAnchor.constraint(equalTo: safeArie.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: safeArie.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeArie.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeArie.bottomAnchor)
         ])
+    }
+    
+}
+
+//MARK: - Datasource/Delegate
+
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        postsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostTableViewCell
+        cell.setupCell(postsArray[indexPath.row])
+        return cell
+    }
+        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ProfileHeaderView()
+        return header
+    }
+
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
     }
 }

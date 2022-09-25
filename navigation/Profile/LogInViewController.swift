@@ -107,8 +107,8 @@ private    let notificationCenter = NotificationCenter.default
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil) // - клавиатура показана на экране
-        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil) // - клавиатура спрятана
+        notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -122,8 +122,6 @@ private    let notificationCenter = NotificationCenter.default
     private func addSubViews() {
         contentView.addSubview(imageVK)
         contentView.addSubview(stackView)
-//        contentView.addSubview(email)
-//        contentView.addSubview(password)
         contentView.addSubview(logInButton)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -138,17 +136,13 @@ private    let notificationCenter = NotificationCenter.default
             scrollView.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeArie.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeArie.bottomAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
+            
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
             imageVK.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             imageVK.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageVK.widthAnchor.constraint(equalToConstant: 100),

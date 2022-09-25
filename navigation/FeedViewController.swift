@@ -1,12 +1,5 @@
-//
-//  FeedViewController.swift
-//  navigation
-//
-//  Created by Сергей Марсалов on 29.06.2022.
-//
 
 import UIKit
-
 
 class FeedViewController: UIViewController {
      let button: UIButton = {
