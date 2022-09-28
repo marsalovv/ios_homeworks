@@ -59,6 +59,8 @@ private    let notificationCenter = NotificationCenter.default
         email.placeholder = "Email or phone"
         email.textColor = .black
         email.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        email.layer.borderWidth = 0.5
+        email.layer.borderColor = UIColor.lightGray.cgColor
         email.autocapitalizationType = .none
         email.keyboardType = .emailAddress
         email.delegate = self
@@ -70,9 +72,11 @@ private    let notificationCenter = NotificationCenter.default
     private lazy var password: UITextField = {
         let password = UITextField()
         password.placeholder = "Password"
-        password.textColor = .black
+        password.textColor = UIColor.black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.isSecureTextEntry = true
+        password.layer.borderWidth = 0.5
+        password.layer.borderColor = UIColor.lightGray.cgColor
         password.delegate = self
         password.translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,13 +86,13 @@ private    let notificationCenter = NotificationCenter.default
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.spacing = 0.5
         stackView.layer.borderWidth = 0.5
         stackView.layer.cornerRadius = 10
-        stackView.backgroundColor = .lightGray
         stackView.clipsToBounds = true
-        stackView.layer.borderColor = UIColor.black.cgColor
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
         stackView.addArrangedSubview(email)
         stackView.addArrangedSubview(password)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +104,7 @@ private    let notificationCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
         addSubViews()
         setupConstrains()
     }

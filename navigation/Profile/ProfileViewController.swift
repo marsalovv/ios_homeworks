@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .gray
+        tableView.backgroundColor = .lightGray
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "cell")

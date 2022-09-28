@@ -2,6 +2,7 @@
 import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
+    
     private lazy var avatarImage: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "avatar.jpg")
@@ -31,6 +32,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         status.text = "У меня лапки!"
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         status.textColor = UIColor.gray
+        status.backgroundColor = .lightGray
         status.translatesAutoresizingMaskIntoConstraints = false
         
         return status
@@ -76,12 +78,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         setupView()
         setupConstrains()
     }
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setupView()
-//        setupConstrains()
-//    }
-//
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
