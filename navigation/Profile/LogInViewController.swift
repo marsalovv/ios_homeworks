@@ -57,6 +57,8 @@ private    let notificationCenter = NotificationCenter.default
     private lazy var email: UITextField = {
         let email = UITextField()
         email.placeholder = "Email or phone"
+//        email.attributedPlaceholder = NSAttributedString(
+//            string: email.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         email.textColor = .black
         email.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         email.layer.borderWidth = 0.5
@@ -72,6 +74,8 @@ private    let notificationCenter = NotificationCenter.default
     private lazy var password: UITextField = {
         let password = UITextField()
         password.placeholder = "Password"
+//        password.attributedPlaceholder = NSAttributedString(
+//            string: password.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         password.textColor = UIColor.black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.isSecureTextEntry = true
@@ -104,7 +108,8 @@ private    let notificationCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationController?.navigationBar.isHidden = true
+        self.view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true
         addSubViews()
         setupConstrains()
     }
