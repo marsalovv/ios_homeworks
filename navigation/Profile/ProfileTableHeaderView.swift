@@ -32,7 +32,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         status.text = "У меня лапки!"
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         status.textColor = UIColor.gray
-        status.backgroundColor = .lightGray
+        status.backgroundColor = .white
         status.translatesAutoresizingMaskIntoConstraints = false
         
         return status
@@ -83,7 +83,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         super.init(coder: coder)
     }
     
-    func setupView() {
+    private func setupView() {
         self.addSubview(button)
         self.addSubview(nameLabel)
         self.addSubview(avatarImage)

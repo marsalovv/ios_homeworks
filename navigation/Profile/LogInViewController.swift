@@ -1,9 +1,8 @@
 
 
 import UIKit
-
 class LogInViewController: UIViewController {
-
+    
 //MARK: -Data
     
 private    let notificationCenter = NotificationCenter.default
@@ -12,7 +11,6 @@ private    let notificationCenter = NotificationCenter.default
         let scroll = UIScrollView()
         scroll.showsVerticalScrollIndicator = true
         scroll.showsHorizontalScrollIndicator = false
-        scroll.backgroundColor = .white
         scroll.translatesAutoresizingMaskIntoConstraints = false
         
         return scroll
@@ -20,7 +18,6 @@ private    let notificationCenter = NotificationCenter.default
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         return contentView
@@ -47,7 +44,7 @@ private    let notificationCenter = NotificationCenter.default
     
     private lazy var imageVK: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "logo.png")
+        image.image = UIImage(named: "logo")
         image.isAccessibilityElement = true
         image.translatesAutoresizingMaskIntoConstraints = false
         

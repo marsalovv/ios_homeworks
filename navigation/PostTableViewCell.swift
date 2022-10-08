@@ -7,12 +7,12 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
-        author.translatesAutoresizingMaskIntoConstraints = false
         author.font = .systemFont(ofSize: 20, weight: .bold)
         author.textColor = .black
         author.numberOfLines = 2
         author.isAccessibilityElement = true
         author.accessibilityTraits = .header
+        author.translatesAutoresizingMaskIntoConstraints = false
         
         return author
     }()
@@ -70,10 +70,8 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-                      
+    //MARK: - Setup
+    
     func setupCell (_ post: Post) {
         authorLabel.text = post.author
         castomImageView.image = UIImage(named: post.image)
@@ -82,10 +80,8 @@ class PostTableViewCell: UITableViewCell {
         viewsLabel.text = "Просмотры: \(String(post.views))"
     }
     
-    //MARK: - Private
-    
     private func setupContentView() {
-        contentView.backgroundColor = .lightGray
+        contentView.backgroundColor = .white
         
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
     }
