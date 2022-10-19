@@ -3,6 +3,29 @@ import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
+    //MARK: - Data
+    
+    private lazy var castomView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.alpha = 0.0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var closeImageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        button.alpha = 0.0
+        //button.backgroundColor = .yellow
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(closeImageAction), for: .touchUpInside)
+        
+        return button
+    }()
+    
     private lazy var avatarImage: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "avatar.jpg")
@@ -12,6 +35,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.isAccessibilityElement = true
         avatar.accessibilityLabel = "avatar"
+        avatar.isUserInteractionEnabled = true
         avatar.translatesAutoresizingMaskIntoConstraints = false
         
         return avatar
@@ -68,60 +92,127 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return textField
     }()
     
-    @objc func printStatus() {
-        if let text = statusLabel.text {
-            print(text)
-        }
-    }
+    private lazy var imagePosition = avatarImage.layer.position
+    private lazy var imageBounds = avatarImage.layer.bounds
+    
+    //MARK: - Init
+
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: nil)
         setupView()
         setupConstrains()
+        setupGesture()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    //MARK: - Setup view
+    
     private func setupView() {
-        self.addSubview(button)
-        self.addSubview(nameLabel)
-        self.addSubview(avatarImage)
-        self.addSubview(statusLabel)
-        self.addSubview(statusTextField)
+        [castomView, closeImageButton, button, statusLabel, avatarImage, statusTextField, nameLabel].forEach {addSubview($0)}
     }
     
-    func setupConstrains() {
-        let safeArie = self.safeAreaLayoutGuide
+    private func setupConstrains() {
+        let safeArie = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            avatarImage.leftAnchor.constraint(equalTo: safeArie.leftAnchor, constant: 16.0),
-            avatarImage.widthAnchor.constraint(equalToConstant: 100.0),
-            avatarImage.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 16.0),
-            avatarImage.heightAnchor.constraint(equalToConstant: 100.0),
+            castomView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            castomView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            castomView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            castomView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
             
-            //nameLabel.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 30.0 ),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15.0),
+            avatarImage.leftAnchor.constraint(equalTo: safeArie.leftAnchor, constant: 16),
+            avatarImage.widthAnchor.constraint(equalToConstant: 100),
+            avatarImage.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 16),
+            avatarImage.heightAnchor.constraint(equalToConstant: 100),
             
-            statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -8.0),
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15.0),
+            //nameLabel.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 30),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15),
             
-            statusTextField.heightAnchor.constraint(equalToConstant: 40.0),
-            statusTextField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16.0),
+            statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -8),
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15),
+            
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            statusTextField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
             statusTextField.leftAnchor.constraint(equalTo: avatarImage.rightAnchor, constant: 15),
-            statusTextField.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16.0),
+            statusTextField.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16),
             
-            button.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor, constant: 16.0),
-            button.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16.0),
-            button.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 34.0),
-            button.heightAnchor.constraint(equalToConstant: 50.0),
+            button.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor, constant: 16),
+            button.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16),
+            button.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 34),
+            button.heightAnchor.constraint(equalToConstant: 50),
+            
+            closeImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            closeImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            closeImageButton.heightAnchor.constraint(equalToConstant: 50),
+            closeImageButton.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
     
-    @objc func statusTextChanged() {
+    //MARK: - Gesture/animation
+    
+    private func setupGesture() {
+        let gest = UITapGestureRecognizer()
+        gest.addTarget(self, action: #selector(animateAvatar))
+        avatarImage.addGestureRecognizer(gest)
+    }
+    
+    @objc private func animateAvatar() {
+         imagePosition = avatarImage.layer.position
+         imageBounds = avatarImage.layer.bounds
+    
+        let centerScreen = UIScreen.main.bounds.height / 2  - avatarImage.bounds.height
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) { [self] in
+            castomView.alpha = 0.7
+            statusLabel.alpha = 0.3
+            statusTextField.alpha = 0.3
+            button.alpha = 0.3
+            self.avatarImage.center.y = centerScreen
+            self.avatarImage.center.x = castomView.center.x
+            self.avatarImage.layer.cornerRadius = 0
+            self.avatarImage.layer.borderWidth = 0.1
+            self.avatarImage.layer.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+                self.layoutIfNeeded()
+                self.closeImageButton.alpha = 1
+            }
+            
+        }
+        
+    }
+    
+    @objc private func closeImageAction() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
+            self.castomView.alpha = 0
+            self.statusLabel.alpha = 1
+            self.statusTextField.alpha = 1
+            self.button.alpha = 1
+
+            self.avatarImage.layer.position = self.imagePosition
+            self.avatarImage.layer.bounds = self.imageBounds
+            self.avatarImage.layer.cornerRadius = self.avatarImage.bounds.width / 2
+            self.closeImageButton.alpha = 0
+        }
+    }
+    
+    
+    //MARK: - Actions
+    
+    @objc private func printStatus() {
+        if let text = statusLabel.text {
+            print(text)
+        }
+    }
+    
+    @objc private func statusTextChanged() {
         if let text = statusTextField.text {
             statusLabel.text = text
         }
+        
     }
+    
 }
 

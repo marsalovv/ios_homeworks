@@ -7,7 +7,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        self.view.backgroundColor = .systemCyan
+        self.view.backgroundColor = .label
         self.navigationController?.navigationBar.backgroundColor = .green
         self.title = post.description
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tapInfo))
