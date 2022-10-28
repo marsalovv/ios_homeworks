@@ -1,15 +1,8 @@
-//
-//  FeedViewController.swift
-//  navigation
-//
-//  Created by Сергей Марсалов on 29.06.2022.
-//
 
 import UIKit
 
-
 class FeedViewController: UIViewController {
-     let button: UIButton = {
+     private lazy var button: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Open post", for: .normal)
@@ -22,7 +15,7 @@ class FeedViewController: UIViewController {
         self.title = "Feed"
         self.view.backgroundColor = .brown
         self.view.addSubview(button)
-        self.navigationController?.navigationBar.backgroundColor = .systemBlue
+        self.navigationController?.navigationBar.backgroundColor = .green
 
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor   ),

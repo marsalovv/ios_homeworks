@@ -1,21 +1,15 @@
-//
-//  PostViewController.swift
-//  navigation
-//
-//  Created by Сергей Марсалов on 30.06.2022.
-//
 
 import UIKit
 
 class PostViewController: UIViewController {
-    let post = Post(title: "My post")
+    let post = Post(author: "marsalovv", description: "my post", image: "", likes: 123, views: 321)
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        self.view.backgroundColor = .systemCyan
+        self.view.backgroundColor = .label
         self.navigationController?.navigationBar.backgroundColor = .green
-        self.title = post.title
+        self.title = post.description
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tapInfo))
     }
 
