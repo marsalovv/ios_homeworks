@@ -28,6 +28,7 @@ class PhotosTableViewCell: UITableViewCell {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
+        
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.axis = .horizontal
@@ -53,7 +54,7 @@ class PhotosTableViewCell: UITableViewCell {
     //MARK: - Setup
     
     func setupCell() {
-        contentView.backgroundColor = .white
+        self.backgroundColor = .clear
         contentView.addSubview(label)
         contentView.addSubview(stackView)
         contentView.addSubview(arrow)
