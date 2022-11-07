@@ -9,8 +9,8 @@ class FeedViewController: UIViewController {
         btn.backgroundColor = .systemCyan
         return btn
     }()
+override func viewDidLoad() {
 
-    override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
         self.view.backgroundColor = .systemRed

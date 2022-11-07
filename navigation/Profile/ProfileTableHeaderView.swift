@@ -1,5 +1,6 @@
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
@@ -18,7 +19,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         button.alpha = 0.0
-        //button.backgroundColor = .yellow
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(closeImageAction), for: .touchUpInside)
@@ -115,40 +115,77 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     private func setupConstrains() {
-        let safeArie = safeAreaLayoutGuide
+
+        avatarImage.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().inset(16)
+            make.size.equalTo(100)
+        }
+         
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(16)
+            make.leading.equalTo(avatarImage.snp_trailingMargin).inset(-15)
+        }
         
-        NSLayoutConstraint.activate([
-            castomView.topAnchor.constraint(equalTo: safeArie.topAnchor),
-            castomView.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor),
-            castomView.trailingAnchor.constraint(equalTo: safeArie.trailingAnchor),
-            castomView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
-            
-            avatarImage.leftAnchor.constraint(equalTo: safeArie.leftAnchor, constant: 16),
-            avatarImage.widthAnchor.constraint(equalToConstant: 100),
-            avatarImage.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 16),
-            avatarImage.heightAnchor.constraint(equalToConstant: 100),
-            
-            //nameLabel.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 30),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15),
-            
-            statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -8),
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15),
-            
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            statusTextField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
-            statusTextField.leftAnchor.constraint(equalTo: avatarImage.rightAnchor, constant: 15),
-            statusTextField.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16),
-            
-            button.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor, constant: 16),
-            button.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16),
-            button.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 34),
-            button.heightAnchor.constraint(equalToConstant: 50),
-            
-            closeImageButton.topAnchor.constraint(equalTo: castomView.topAnchor, constant: 16),
-            closeImageButton.trailingAnchor.constraint(equalTo: castomView.trailingAnchor, constant: -16),
-            closeImageButton.heightAnchor.constraint(equalToConstant: 50),
-            closeImageButton.widthAnchor.constraint(equalToConstant: 50)
-        ])
+        button.snp.makeConstraints { make in
+            make.top.equalTo(avatarImage.snp.bottom).inset(-34)
+            make.height.equalTo(50)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+        statusTextField.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.bottom.equalTo(button.snp_topMargin).inset(-16)
+            make.leading.equalTo(avatarImage.snp_trailingMargin).inset(-15)
+            make.trailing.equalToSuperview().inset(16)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.leading.equalTo(avatarImage.snp_trailingMargin).inset(-15)
+            make.bottom.equalTo(statusTextField.snp_topMargin).inset(-8)
+        }
+        
+        closeImageButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(16)
+            make.size.equalTo(20)
+        }
+        
+        castomView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height)
+        }
+
+//        NSLayoutConstraint.activate([
+//            castomView.topAnchor.constraint(equalTo: safeArie.topAnchor),
+//            castomView.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor),
+//            castomView.trailingAnchor.constraint(equalTo: safeArie.trailingAnchor),
+//            castomView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+//
+//            avatarImage.leftAnchor.constraint(equalTo: safeArie.leftAnchor, constant: 16),
+//            avatarImage.widthAnchor.constraint(equalToConstant: 100),
+//            avatarImage.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 16),
+//            avatarImage.heightAnchor.constraint(equalToConstant: 100),
+//
+//            nameLabel.topAnchor.constraint(equalTo: safeArie.topAnchor, constant: 30),
+//            nameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15),
+//
+//            statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -8),
+//            statusLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 15),
+//
+//            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+//            statusTextField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
+//            statusTextField.leftAnchor.constraint(equalTo: avatarImage.rightAnchor, constant: 15),
+//            statusTextField.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16),
+//
+//            button.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor, constant: 16),
+//            button.rightAnchor.constraint(equalTo: safeArie.rightAnchor, constant: -16),
+//            button.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 34),
+//            button.heightAnchor.constraint(equalToConstant: 50),
+//
+//            closeImageButton.topAnchor.constraint(equalTo: castomView.topAnchor, constant: 16),
+//            closeImageButton.trailingAnchor.constraint(equalTo: castomView.trailingAnchor, constant: -16),
+//            closeImageButton.heightAnchor.constraint(equalToConstant: 50),
+//            closeImageButton.widthAnchor.constraint(equalToConstant: 50)
+//        ])
     }
     
     //MARK: - Gesture/animation
