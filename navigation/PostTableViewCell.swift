@@ -1,10 +1,13 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
-    class PostTableViewCell: UITableViewCell {
+
+class PostTableViewCell: UITableViewCell {
     
     //MARK: - Data
+    private let imageProcessor = ImageProcessor()
     
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
@@ -22,7 +25,7 @@ import StorageService
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.backgroundColor = .black
+        image.backgroundColor = .clear
         image.isAccessibilityElement = true
         
         return image
@@ -59,7 +62,7 @@ import StorageService
         return views
     }()
     
-        //MARK: - Init
+    //MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,18 +77,25 @@ import StorageService
     //MARK: - Setup
     
     func setupCell (_ post: Post) {
-        self.backgroundColor = .clear
         authorLabel.text = post.author
-        castomImageView.image = UIImage(named: post.image)
+        //castomImageView.image = UIImage(named: post.image)
+        imageProcessor.processImage(
+            sourceImage: UIImage(named: post.image)!,
+            filter: .fade,
+                completion: applyCastomImage(_:))
         descriptionLabel.text = post.description
         likesLabel.text = "Лайки: \(String(post.likes))"
         viewsLabel.text = "Просмотры: \(String(post.views))"
     }
     
+    private func applyCastomImage(_ image: UIImage?) {
+        castomImageView.image = image
+    }
+    
     private func setupContentView() {
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
     }
-                      
+    
     private func setupConstraints () {
         NSLayoutConstraint.activate([
             authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -111,8 +121,8 @@ import StorageService
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
         ])
-            
+        
     }
-                      
+    
 }
-                    
+

@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "photo")
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return tableView
     }()
     
@@ -31,14 +31,14 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        #if DEBUG
+#if DEBUG
         self.view.backgroundColor = .systemRed
-        #else
+#else
         self.view.backgroundColor = .white
-        #endif
+#endif
         
         self.view.addSubview(tableView)
-
+        
         setupConstrains()
     }
     
@@ -61,8 +61,8 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-       2
-   }
+        2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -85,7 +85,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
     }
-        
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
@@ -98,7 +98,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 220
