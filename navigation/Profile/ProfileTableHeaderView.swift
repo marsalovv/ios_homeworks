@@ -118,9 +118,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let safeArie = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            castomView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            castomView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            castomView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            castomView.topAnchor.constraint(equalTo: safeArie.topAnchor),
+            castomView.leadingAnchor.constraint(equalTo: safeArie.leadingAnchor),
+            castomView.trailingAnchor.constraint(equalTo: safeArie.trailingAnchor),
             castomView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
             
             avatarImage.leftAnchor.constraint(equalTo: safeArie.leftAnchor, constant: 16),
@@ -144,8 +144,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             button.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 34),
             button.heightAnchor.constraint(equalToConstant: 50),
             
-            closeImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            closeImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            closeImageButton.topAnchor.constraint(equalTo: castomView.topAnchor, constant: 16),
+            closeImageButton.trailingAnchor.constraint(equalTo: castomView.trailingAnchor, constant: -16),
             closeImageButton.heightAnchor.constraint(equalToConstant: 50),
             closeImageButton.widthAnchor.constraint(equalToConstant: 50)
         ])

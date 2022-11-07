@@ -1,5 +1,6 @@
 
 import UIKit
+import StorageService
 
 class PostViewController: UIViewController {
     let post = Post(author: "marsalovv", description: "my post", image: "", likes: 123, views: 321)

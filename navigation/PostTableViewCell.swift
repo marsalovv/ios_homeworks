@@ -1,7 +1,8 @@
 
 import UIKit
+import StorageService
 
-class PostTableViewCell: UITableViewCell {
+    class PostTableViewCell: UITableViewCell {
     
     //MARK: - Data
     
@@ -73,6 +74,7 @@ class PostTableViewCell: UITableViewCell {
     //MARK: - Setup
     
     func setupCell (_ post: Post) {
+        self.backgroundColor = .clear
         authorLabel.text = post.author
         castomImageView.image = UIImage(named: post.image)
         descriptionLabel.text = post.description
@@ -81,8 +83,6 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupContentView() {
-        contentView.backgroundColor = .white
-        
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
     }
                       

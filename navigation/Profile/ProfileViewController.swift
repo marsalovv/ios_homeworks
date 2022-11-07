@@ -1,6 +1,7 @@
 
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -16,7 +17,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -30,7 +31,12 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        #if DEBUG
+        self.view.backgroundColor = .systemRed
+        #else
+        self.view.backgroundColor = .systemGreen
+        #endif
+        
         self.view.addSubview(tableView)
 
         setupConstrains()
