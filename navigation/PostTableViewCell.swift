@@ -78,21 +78,17 @@ class PostTableViewCell: UITableViewCell {
     
     func setupCell (_ post: Post) {
         authorLabel.text = post.author
-        //castomImageView.image = UIImage(named: post.image)
         imageProcessor.processImage(
             sourceImage: UIImage(named: post.image)!,
             filter: .fade,
-                completion: applyCastomImage(_:))
+            completion: {castomImageView.image = $0})
         descriptionLabel.text = post.description
         likesLabel.text = "Лайки: \(String(post.likes))"
         viewsLabel.text = "Просмотры: \(String(post.views))"
     }
     
-    private func applyCastomImage(_ image: UIImage?) {
-        castomImageView.image = image
-    }
-    
     private func setupContentView() {
+        self.backgroundColor = .clear
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
     }
     
