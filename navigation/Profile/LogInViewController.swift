@@ -3,9 +3,9 @@
 import UIKit
 class LogInViewController: UIViewController {
     
-//MARK: -Data
+    //MARK: -Data
     
-private    let notificationCenter = NotificationCenter.default
+    private    let notificationCenter = NotificationCenter.default
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -34,8 +34,8 @@ private    let notificationCenter = NotificationCenter.default
         
         if button.isSelected || button.isHighlighted || button.isEnabled == false {
             button.backgroundColor?.withAlphaComponent(0.8)
-            }
-
+        }
+        
         button.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -54,8 +54,8 @@ private    let notificationCenter = NotificationCenter.default
     private lazy var email: UITextField = {
         let email = UITextField()
         email.placeholder = "Email or phone"
-//        email.attributedPlaceholder = NSAttributedString(
-//            string: email.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        //        email.attributedPlaceholder = NSAttributedString(
+        //            string: email.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         email.textColor = .black
         email.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         email.layer.borderWidth = 0.5
@@ -71,8 +71,8 @@ private    let notificationCenter = NotificationCenter.default
     private lazy var password: UITextField = {
         let password = UITextField()
         password.placeholder = "Password"
-//        password.attributedPlaceholder = NSAttributedString(
-//            string: password.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        //        password.attributedPlaceholder = NSAttributedString(
+        //            string: password.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         password.textColor = UIColor.black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.isSecureTextEntry = true
@@ -101,7 +101,7 @@ private    let notificationCenter = NotificationCenter.default
         return stackView
     }()
     
-        //MARK: -LifeCycle
+    //MARK: -LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,8 +123,8 @@ private    let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-        //MARK: -Private
-
+    //MARK: -Private
+    
     private func addSubViews() {
         contentView.addSubview(imageVK)
         contentView.addSubview(stackView)
@@ -153,7 +153,7 @@ private    let notificationCenter = NotificationCenter.default
             imageVK.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageVK.widthAnchor.constraint(equalToConstant: 100),
             imageVK.heightAnchor.constraint(equalToConstant: 100),
-        
+            
             stackView.topAnchor.constraint(equalTo: imageVK.bottomAnchor, constant: 120),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -169,7 +169,11 @@ private    let notificationCenter = NotificationCenter.default
     }
     
     @objc func buttonPress() {
+#if DEBUG
+        let currentUser = TestUserService()
+#else
         let currentUser = CurrentUserService()
+#endif
         guard let loginText = email.text else { return }
         guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: loginText) else {
             let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с таким именем не найден!", preferredStyle: .alert)
@@ -180,7 +184,7 @@ private    let notificationCenter = NotificationCenter.default
         }
         let profileNavv = ProfileViewController(user: verifiedUser)
         self.navigationController?.pushViewController(profileNavv, animated: true)
-
+        
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
@@ -194,12 +198,12 @@ private    let notificationCenter = NotificationCenter.default
         scrollView.contentInset = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
-
+    
 }
 
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
- true
+        true
     }
     
 }
