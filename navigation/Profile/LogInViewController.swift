@@ -169,7 +169,16 @@ private    let notificationCenter = NotificationCenter.default
     }
     
     @objc func buttonPress() {
-        let profileNavv = ProfileViewController()
+        let currentUser = CurrentUserService()
+        guard let loginText = email.text else { return }
+        guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: loginText) else {
+            let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с таким именем не найден!", preferredStyle: .alert)
+            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(alertCansel)
+            present(alert, animated: true)
+            return
+        }
+        let profileNavv = ProfileViewController(user: verifiedUser)
         self.navigationController?.pushViewController(profileNavv, animated: true)
 
     }

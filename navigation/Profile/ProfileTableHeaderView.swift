@@ -5,6 +5,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Data
     
+
     private lazy var castomView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -18,7 +19,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         button.alpha = 0.0
-        //button.backgroundColor = .yellow
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(closeImageAction), for: .touchUpInside)
@@ -28,7 +28,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var avatarImage: UIImageView = {
         let avatar = UIImageView()
-        avatar.image = UIImage(named: "avatar.jpg")
+        avatar.image = UIImage()
         avatar.clipsToBounds = true
         avatar.layer.cornerRadius = 50
         avatar.layer.borderWidth = 3
@@ -43,7 +43,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var  nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Angoric"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +52,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
-        status.text = "У меня лапки!"
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         status.textColor = UIColor.gray
         status.backgroundColor = .white
@@ -110,6 +108,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Setup view
     
+    func setupViewCurrendUser(user: User) {
+        self.avatarImage.image = user.avatar
+        self.nameLabel.text = user.fullName
+        self.statusLabel.text = user.status
+    }
     private func setupView() {
         [castomView, closeImageButton, button, statusLabel, avatarImage, statusTextField, nameLabel].forEach {addSubview($0)}
     }
