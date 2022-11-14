@@ -9,10 +9,6 @@ class Checker {
     private let password = "qwerty123"
     
     func check(login: String, password: String) -> Bool {
-        if self.login == login && self.password == password {
-            return true
-        } else {
-            return false
-        }
+        self.login == login && self.password == password
     }
 }

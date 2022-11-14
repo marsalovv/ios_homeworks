@@ -2,6 +2,6 @@
 
 protocol LoginFactory {
     
-    static func makeLoginInspector() -> LoginInspector
+    func makeLoginInspector() -> LoginInspector
     
 }

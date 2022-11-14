@@ -1,11 +1,12 @@
 
 
 import UIKit
+
 class LogInViewController: UIViewController {
     
     //MARK: -Data
     
-    static var loginDelegate: LoginViewControllerDelegate?
+    var loginDelegate: LoginViewControllerDelegate?
     
     private    let notificationCenter = NotificationCenter.default
     
@@ -65,6 +66,7 @@ class LogInViewController: UIViewController {
         email.autocapitalizationType = .none
         email.keyboardType = .emailAddress
         email.delegate = self
+        email.text = "angoric"
         email.translatesAutoresizingMaskIntoConstraints = false
         
         return email
@@ -81,6 +83,7 @@ class LogInViewController: UIViewController {
         password.layer.borderWidth = 0.5
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.delegate = self
+        password.text = "qwerty123"
         password.translatesAutoresizingMaskIntoConstraints = false
         
         return password
@@ -185,7 +188,7 @@ class LogInViewController: UIViewController {
             present(alert, animated: true)
             return
         }
-        guard LogInViewController.loginDelegate?.check(login: loginText, password: passwordText) == true else {
+        guard loginDelegate?.check(login: loginText, password: passwordText) == true else {
             let alert = UIAlertController(title: "Внимание!!!", message: "Не верный пароль!", preferredStyle:.alert)
             let alertCansel = UIAlertAction(title: "OK", style: .cancel)
             alert.addAction(alertCansel)

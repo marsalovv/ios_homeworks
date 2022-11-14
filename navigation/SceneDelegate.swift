@@ -11,18 +11,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tbvc = UITabBarController()
         let feedNav = UINavigationController(rootViewController: FeedViewController())
         feedNav.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 1)
-            let profileNav = UINavigationController(rootViewController: LogInViewController())
+        let factory = MyLoginFactory()
+        let loginInspector = factory.makeLoginInspector()
+        let loginVC = LogInViewController()
+        loginVC.loginDelegate = loginInspector
+            let profileNav = UINavigationController(rootViewController: loginVC)
         profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.text.rectangle"), tag: 1)
         tbvc.setViewControllers([feedNav, profileNav,], animated: true)
-        
-        LogInViewController.loginDelegate = MyLoginFactory.makeLoginInspector()
         
         window?.rootViewController = tbvc
         window?.makeKeyAndVisible()
         
-        
     }
-    
     
 }
 
