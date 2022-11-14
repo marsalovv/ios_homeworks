@@ -6,7 +6,7 @@ class CurrentUserService: UserService {
     var user: User
     
     init() {
-        self.user = User(login: "angoric", fullName: "Angoric", status: "У меня лапы", avatar: UIImage(named: "avatar.jpg")!)
+        self.user = User(login: "angoric", fullName: "Angoric", status: "У меня лапки", avatar: UIImage(named: "avatar.jpg")!)
     }
     
     convenience init(user: User) {

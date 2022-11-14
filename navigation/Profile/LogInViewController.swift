@@ -5,6 +5,8 @@ class LogInViewController: UIViewController {
     
     //MARK: -Data
     
+    static var loginDelegate: LoginViewControllerDelegate?
+    
     private    let notificationCenter = NotificationCenter.default
     
     private lazy var scrollView: UIScrollView = {
@@ -175,6 +177,7 @@ class LogInViewController: UIViewController {
         let currentUser = CurrentUserService()
 #endif
         guard let loginText = email.text else { return }
+        guard let passwordText = password.text else { return }
         guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: loginText) else {
             let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с таким именем не найден!", preferredStyle: .alert)
             let alertCansel = UIAlertAction(title: "OK", style: .cancel)
@@ -182,6 +185,14 @@ class LogInViewController: UIViewController {
             present(alert, animated: true)
             return
         }
+        guard LogInViewController.loginDelegate?.check(login: loginText, password: passwordText) == true else {
+            let alert = UIAlertController(title: "Внимание!!!", message: "Не верный пароль!", preferredStyle:.alert)
+            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(alertCansel)
+            present(alert, animated: true)
+            return
+        }
+        
         let profileNavv = ProfileViewController(user: verifiedUser)
         self.navigationController?.pushViewController(profileNavv, animated: true)
         
@@ -207,3 +218,5 @@ extension LogInViewController: UITextFieldDelegate {
     }
     
 }
+
+
