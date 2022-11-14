@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.text.rectangle"), tag: 1)
         tbvc.setViewControllers([feedNav, profileNav,], animated: true)
         
-        LogInViewController.loginDelegate = LoginInspector()
+        LogInViewController.loginDelegate = MyLoginFactory.makeLoginInspector()
         
         window?.rootViewController = tbvc
         window?.makeKeyAndVisible()

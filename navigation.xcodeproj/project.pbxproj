@@ -35,6 +35,8 @@
 		69E0F0AE2922527A00C89071 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0AD2922527A00C89071 /* Checker.swift */; };
 		69E0F0B02922547D00C89071 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0AF2922547D00C89071 /* LoginViewControllerDelegate.swift */; };
 		69E0F0B429225E9C00C89071 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0B329225E9C00C89071 /* LoginInspector.swift */; };
+		69E0F0B8292271F000C89071 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0B7292271F000C89071 /* LoginFactory.swift */; };
+		69E0F0BA2922726300C89071 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0B92922726300C89071 /* MyLoginFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,8 @@
 		69E0F0AD2922527A00C89071 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		69E0F0AF2922547D00C89071 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		69E0F0B329225E9C00C89071 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		69E0F0B7292271F000C89071 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		69E0F0B92922726300C89071 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +217,8 @@
 				69E0F0AD2922527A00C89071 /* Checker.swift */,
 				69E0F0AF2922547D00C89071 /* LoginViewControllerDelegate.swift */,
 				69E0F0B329225E9C00C89071 /* LoginInspector.swift */,
+				69E0F0B7292271F000C89071 /* LoginFactory.swift */,
+				69E0F0B92922726300C89071 /* MyLoginFactory.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 				69964E25291C05BD00A82A96 /* UserServiceProtocol.swift in Sources */,
 				69964E23291C046800A82A96 /* User.swift in Sources */,
 				69C56142286DF4E8008ED874 /* PostViewController.swift in Sources */,
+				69E0F0BA2922726300C89071 /* MyLoginFactory.swift in Sources */,
 				6936B31C286C6DB300B3FB93 /* AppDelegate.swift in Sources */,
 				69E0F0B429225E9C00C89071 /* LoginInspector.swift in Sources */,
 				697B8F2C28A3DDF900DCD94E /* LogInViewController.swift in Sources */,
@@ -391,6 +398,7 @@
 				6936B332286C7F4A00B3FB93 /* ProfileViewController.swift in Sources */,
 				6936B330286C7F3900B3FB93 /* FeedViewController.swift in Sources */,
 				69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */,
+				69E0F0B8292271F000C89071 /* LoginFactory.swift in Sources */,
 				694050BE28DDBA3100F0944F /* PostTableViewCell.swift in Sources */,
 				691B54CF28EDDB75008B496D /* PhotosViewController.swift in Sources */,
 				69E0F0B02922547D00C89071 /* LoginViewControllerDelegate.swift in Sources */,
