@@ -4,11 +4,24 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    private lazy var button: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var button: CastomButton = {
+        let btn = CastomButton(title: "Alert")
+        btn.action = { [weak self] in
+            let alert = UIAlertController(title: "Alert!", message: "Следи за собой!", preferredStyle: .alert)
+            let okAlertAction = UIAlertAction(title: "OK", style: .default) { (action : UIAlertAction) in
+                self?.dismiss(animated: true)
+                print("Ok")
+            }
+            let cancelAlertAction = UIAlertAction(title: "Отмена", style: .cancel) { (action : UIAlertAction) in
+                print("Cansel")
+            }
+            
+            alert.addAction(okAlertAction)
+            alert.addAction(cancelAlertAction)
+            self?.present(alert, animated: true)
+
+        }
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 100)
-        btn.setTitle("Alert", for: .normal)
         btn.backgroundColor = .red
         btn.layer.cornerRadius = 150
         btn.layer.borderColor = UIColor.white.cgColor
@@ -29,25 +42,9 @@ class InfoViewController: UIViewController {
             button.widthAnchor.constraint(equalToConstant: 300)
         ])
         
-        button.addTarget(self, action: #selector(tapAlert), for: .touchUpInside)
+
 
     }
     
-    @objc func tapAlert() {
-        let alert = UIAlertController(title: "Alert!", message: "Следи за собой!", preferredStyle: .alert)
-        let okAlertAction = UIAlertAction(title: "OK", style: .default) { (action : UIAlertAction) in
-            self.dismiss(animated: true)
-            print("Ok")
-        }
-        let cancelAlertAction = UIAlertAction(title: "Отмена", style: .cancel) { (action : UIAlertAction) in
-            print("Cansel")
-        }
-        
-        alert.addAction(okAlertAction)
-        alert.addAction(cancelAlertAction)
-        present(alert, animated: true, completion: nil)
-
-    }
-
 
 }

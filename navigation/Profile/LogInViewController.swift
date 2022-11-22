@@ -26,11 +26,13 @@ class LogInViewController: UIViewController {
         return contentView
     }()
     
-    private lazy var logInButton: UIButton = {
-        let button = UIButton()
+    private lazy var logInButton: CastomButton = {
+        let button = CastomButton(title: "Войти", TitleColor: .white)
+        button.action = { [weak self] in
+            self?.buttonPress()
+        }
         let colorButton = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+
         button.layer.cornerRadius = 10
         button.backgroundColor = colorButton
         button.backgroundColor?.withAlphaComponent(1)
@@ -38,9 +40,6 @@ class LogInViewController: UIViewController {
         if button.isSelected || button.isHighlighted || button.isEnabled == false {
             button.backgroundColor?.withAlphaComponent(0.8)
         }
-        
-        button.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -173,7 +172,7 @@ class LogInViewController: UIViewController {
         
     }
     
-    @objc func buttonPress() {
+     private func buttonPress() {
 #if DEBUG
         let currentUser = TestUserService()
 #else

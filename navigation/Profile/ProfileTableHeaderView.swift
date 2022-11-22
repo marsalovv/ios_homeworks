@@ -5,7 +5,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Data
     
-
+    
     private lazy var castomView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -60,9 +60,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return status
     }()
     
-    private lazy var button :UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Show status", for: .normal)
+    private lazy var button :CastomButton = {
+        let btn = CastomButton(title: "Show status", TitleColor: .white)
+        btn.action = { [weak self] in
+            guard let status = self?.statusLabel.text else { return }
+            print(status)
+        }
+        
         btn.backgroundColor = .systemBlue
         btn.layer.cornerRadius = 14
         btn.layer.shadowRadius = 4
@@ -70,8 +74,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         btn.layer.shadowOffset.height = 4
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.7
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(printStatus), for: .touchUpInside)
         
         return btn
     }()
@@ -94,14 +96,14 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var imageBounds = avatarImage.layer.bounds
     
     //MARK: - Init
-
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: nil)
         setupView()
         setupConstrains()
         setupGesture()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -163,9 +165,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func animateAvatar() {
-         imagePosition = avatarImage.layer.position
-         imageBounds = avatarImage.layer.bounds
-    
+        imagePosition = avatarImage.layer.position
+        imageBounds = avatarImage.layer.bounds
+        
         let centerScreen = UIScreen.main.bounds.height / 2  - avatarImage.bounds.height
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) { [self] in
             castomView.alpha = 0.7
@@ -193,7 +195,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             self.statusLabel.alpha = 1
             self.statusTextField.alpha = 1
             self.button.alpha = 1
-
+            
             self.avatarImage.layer.position = self.imagePosition
             self.avatarImage.layer.bounds = self.imageBounds
             self.avatarImage.layer.cornerRadius = self.avatarImage.bounds.width / 2
@@ -204,11 +206,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Actions
     
-    @objc private func printStatus() {
-        if let text = statusLabel.text {
-            print(text)
-        }
-    }
     
     @objc private func statusTextChanged() {
         if let text = statusTextField.text {

@@ -24,6 +24,7 @@
 		6936B332286C7F4A00B3FB93 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936B331286C7F4A00B3FB93 /* ProfileViewController.swift */; };
 		694050BE28DDBA3100F0944F /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694050BD28DDBA3100F0944F /* PostTableViewCell.swift */; };
 		69483C9D28747FBB00571759 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69483C9C28747FBB00571759 /* ProfileTableHeaderView.swift */; };
+		6958780B292BD70C007CF184 /* CastomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6958780A292BD70C007CF184 /* CastomButton.swift */; };
 		696846802871CEAB000DE059 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968467F2871CEAB000DE059 /* InfoViewController.swift */; };
 		696A8A34292A733D00B0A999 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 696A8A33292A733D00B0A999 /* iOSIntPackage */; };
 		697B8F2C28A3DDF900DCD94E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B8F2B28A3DDF900DCD94E /* LogInViewController.swift */; };
@@ -31,6 +32,7 @@
 		69964E23291C046800A82A96 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69964E22291C046800A82A96 /* User.swift */; };
 		69964E25291C05BD00A82A96 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69964E24291C05BD00A82A96 /* UserServiceProtocol.swift */; };
 		69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69964E26291C073500A82A96 /* CurrentUserService.swift */; };
+		69ACFCC7292CE2EC0006B97D /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACFCC6292CE2EC0006B97D /* FeedModel.swift */; };
 		69C56142286DF4E8008ED874 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C56141286DF4E8008ED874 /* PostViewController.swift */; };
 		69C575FF28EC3F1100930D1E /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C575FE28EC3F1100930D1E /* PhotosTableViewCell.swift */; };
 		69E0F0AE2922527A00C89071 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0AD2922527A00C89071 /* Checker.swift */; };
@@ -96,12 +98,14 @@
 		6936B331286C7F4A00B3FB93 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		694050BD28DDBA3100F0944F /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		69483C9C28747FBB00571759 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
+		6958780A292BD70C007CF184 /* CastomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomButton.swift; sourceTree = "<group>"; };
 		6968467F2871CEAB000DE059 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		697B8F2B28A3DDF900DCD94E /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		698D43D1291D45000050AF3C /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		69964E22291C046800A82A96 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		69964E24291C05BD00A82A96 /* UserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceProtocol.swift; sourceTree = "<group>"; };
 		69964E26291C073500A82A96 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		69ACFCC6292CE2EC0006B97D /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		69C5613F286DF3F1008ED874 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		69C56141286DF4E8008ED874 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		69C575FE28EC3F1100930D1E /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,9 +184,11 @@
 		6936B31A286C6DB300B3FB93 /* navigation */ = {
 			isa = PBXGroup;
 			children = (
+				69587809292BD6BA007CF184 /* Views */,
 				6936B31B286C6DB300B3FB93 /* AppDelegate.swift */,
 				6936B31D286C6DB300B3FB93 /* SceneDelegate.swift */,
 				6936B32F286C7F3900B3FB93 /* FeedViewController.swift */,
+				69ACFCC6292CE2EC0006B97D /* FeedModel.swift */,
 				69C5613F286DF3F1008ED874 /* Post.swift */,
 				694050BD28DDBA3100F0944F /* PostTableViewCell.swift */,
 				69C56141286DF4E8008ED874 /* PostViewController.swift */,
@@ -207,6 +213,14 @@
 				69E0F0AC2922523300C89071 /* User */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		69587809292BD6BA007CF184 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6958780A292BD70C007CF184 /* CastomButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		69E0F0AC2922523300C89071 /* User */ = {
@@ -395,6 +409,7 @@
 				69964E25291C05BD00A82A96 /* UserServiceProtocol.swift in Sources */,
 				69964E23291C046800A82A96 /* User.swift in Sources */,
 				69C56142286DF4E8008ED874 /* PostViewController.swift in Sources */,
+				69ACFCC7292CE2EC0006B97D /* FeedModel.swift in Sources */,
 				69E0F0BA2922726300C89071 /* MyLoginFactory.swift in Sources */,
 				6936B31C286C6DB300B3FB93 /* AppDelegate.swift in Sources */,
 				69E0F0B429225E9C00C89071 /* LoginInspector.swift in Sources */,
@@ -407,6 +422,7 @@
 				6936B330286C7F3900B3FB93 /* FeedViewController.swift in Sources */,
 				69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */,
 				69E0F0B8292271F000C89071 /* LoginFactory.swift in Sources */,
+				6958780B292BD70C007CF184 /* CastomButton.swift in Sources */,
 				694050BE28DDBA3100F0944F /* PostTableViewCell.swift in Sources */,
 				691B54CF28EDDB75008B496D /* PhotosViewController.swift in Sources */,
 				69E0F0B02922547D00C89071 /* LoginViewControllerDelegate.swift in Sources */,

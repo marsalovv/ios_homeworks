@@ -2,36 +2,96 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-     private lazy var button: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Open post", for: .normal)
-        btn.backgroundColor = .systemCyan
+    
+    //MARK: - Data
+    
+    private lazy var Result: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private lazy var wordTextField: UITextField = {
+        let wtf = UITextField()
+        wtf.delegate = self
+        wtf.placeholder = "Введите слово"
+        wtf.textColor = .black
+        wtf.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        wtf.layer.borderWidth = 0.5
+        wtf.layer.borderColor = UIColor.lightGray.cgColor
+        wtf.backgroundColor = .white
+        wtf.autocapitalizationType = .none
+        wtf.translatesAutoresizingMaskIntoConstraints = false
+        
+        return wtf
+    }()
+    
+    private lazy var checkGuessButton: CastomButton = {
+        let btn = CastomButton(title: "Проверить", TitleColor: .green)
+        btn.action = { [weak self] in
+            guard self?.wordTextField.text?.isEmpty == false else { return }
+            guard let word = self?.wordTextField.text else {return}
+            
+            self?.Result.backgroundColor = FeedModel.shared.check(word: word) ? .green : .red
+        }
+        
         return btn
     }()
-
+    
+    private lazy var button: CastomButton = {
+        let btn = CastomButton(title: "Открыть пост", TitleColor: .cyan)
+        btn.backgroundColor = .green
+        btn.action = { [weak self] in
+            let postVC = PostViewController()
+            self?.navigationController?.pushViewController(postVC, animated: true)
+        }
+        
+        return btn
+    }()
+    
+    //MARK: - Life cyckle / private func
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Feed"
-        self.view.backgroundColor = .systemRed
-        self.view.addSubview(button)
+        title = "Feed"
+        view.backgroundColor = .systemRed
+        view.addSubview(button)
+        view.addSubview(wordTextField)
+        view.addSubview(checkGuessButton)
+        view.addSubview(Result)
         self.navigationController?.navigationBar.backgroundColor = .green
-
+        
+        setupConstrayns()
+    }
+    
+    private func setupConstrayns() {
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor   ),
-            button.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            wordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            wordTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -60),
+            wordTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60),
+            wordTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            checkGuessButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            checkGuessButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+            Result.topAnchor.constraint(equalTo: wordTextField.bottomAnchor, constant: 24),
+            Result.bottomAnchor.constraint(equalTo: checkGuessButton.topAnchor, constant: -24),
+            Result.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            Result.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
-        
-        button.addTarget(self, action: #selector(tabButton), for: .touchUpInside)
     }
-        
-    @objc func tabButton() {
+    
+}
 
-let postVC = PostViewController()
-        
-        self.navigationController?.pushViewController(postVC, animated: true)
+//Mark: - Extension
 
+extension FeedViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        true
     }
-
-
+    
 }
