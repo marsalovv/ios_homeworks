@@ -26,8 +26,8 @@ class LogInViewController: UIViewController {
         return contentView
     }()
     
-    private lazy var logInButton: CastomButton = {
-        let button = CastomButton(title: "Войти", TitleColor: .white)
+    private lazy var logInButton: CustomButton = {
+        let button = CustomButton(title: "Войти", TitleColor: .white)
         button.action = { [weak self] in
             self?.buttonPress()
         }

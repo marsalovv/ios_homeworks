@@ -27,8 +27,8 @@ class FeedViewController: UIViewController {
         return wtf
     }()
     
-    private lazy var checkGuessButton: CastomButton = {
-        let btn = CastomButton(title: "Проверить", TitleColor: .green)
+    private lazy var checkGuessButton: CustomButton = {
+        let btn = CustomButton(title: "Проверить", TitleColor: .green)
         btn.action = { [weak self] in
             guard self?.wordTextField.text?.isEmpty == false else { return }
             guard let word = self?.wordTextField.text else {return}
@@ -39,23 +39,24 @@ class FeedViewController: UIViewController {
         return btn
     }()
     
-    private lazy var button: CastomButton = {
-        let btn = CastomButton(title: "Открыть пост", TitleColor: .cyan)
+    private lazy var button: CustomButton = {
+        let btn = CustomButton(title: "Открыть пост", TitleColor: .cyan)
         btn.backgroundColor = .green
         btn.action = { [weak self] in
             let postVC = PostViewController()
             self?.navigationController?.pushViewController(postVC, animated: true)
         }
-        
+
         return btn
     }()
+    
     
     //MARK: - Life cyckle / private func
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Feed"
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemBackground
         view.addSubview(button)
         view.addSubview(wordTextField)
         view.addSubview(checkGuessButton)

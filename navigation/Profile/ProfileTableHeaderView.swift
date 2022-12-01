@@ -60,8 +60,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return status
     }()
     
-    private lazy var button :CastomButton = {
-        let btn = CastomButton(title: "Show status", TitleColor: .white)
+    private lazy var button :CustomButton = {
+        let btn = CustomButton(title: "Show status", TitleColor: .white)
         btn.action = { [weak self] in
             guard let status = self?.statusLabel.text else { return }
             print(status)

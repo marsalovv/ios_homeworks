@@ -24,7 +24,7 @@
 		6936B332286C7F4A00B3FB93 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936B331286C7F4A00B3FB93 /* ProfileViewController.swift */; };
 		694050BE28DDBA3100F0944F /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694050BD28DDBA3100F0944F /* PostTableViewCell.swift */; };
 		69483C9D28747FBB00571759 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69483C9C28747FBB00571759 /* ProfileTableHeaderView.swift */; };
-		6958780B292BD70C007CF184 /* CastomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6958780A292BD70C007CF184 /* CastomButton.swift */; };
+		6958780B292BD70C007CF184 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6958780A292BD70C007CF184 /* CustomButton.swift */; };
 		696846802871CEAB000DE059 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968467F2871CEAB000DE059 /* InfoViewController.swift */; };
 		696A8A34292A733D00B0A999 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 696A8A33292A733D00B0A999 /* iOSIntPackage */; };
 		697B8F2C28A3DDF900DCD94E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B8F2B28A3DDF900DCD94E /* LogInViewController.swift */; };
@@ -98,7 +98,7 @@
 		6936B331286C7F4A00B3FB93 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		694050BD28DDBA3100F0944F /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		69483C9C28747FBB00571759 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
-		6958780A292BD70C007CF184 /* CastomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomButton.swift; sourceTree = "<group>"; };
+		6958780A292BD70C007CF184 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6968467F2871CEAB000DE059 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		697B8F2B28A3DDF900DCD94E /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		698D43D1291D45000050AF3C /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 		69587809292BD6BA007CF184 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6958780A292BD70C007CF184 /* CastomButton.swift */,
+				6958780A292BD70C007CF184 /* CustomButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,7 +422,7 @@
 				6936B330286C7F3900B3FB93 /* FeedViewController.swift in Sources */,
 				69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */,
 				69E0F0B8292271F000C89071 /* LoginFactory.swift in Sources */,
-				6958780B292BD70C007CF184 /* CastomButton.swift in Sources */,
+				6958780B292BD70C007CF184 /* CustomButton.swift in Sources */,
 				694050BE28DDBA3100F0944F /* PostTableViewCell.swift in Sources */,
 				691B54CF28EDDB75008B496D /* PhotosViewController.swift in Sources */,
 				69E0F0B02922547D00C89071 /* LoginViewControllerDelegate.swift in Sources */,

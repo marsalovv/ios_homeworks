@@ -1,7 +1,7 @@
 
 import UIKit
 
-class CastomButton: UIButton {
+class CustomButton: UIButton {
     
     var action: (() -> Void)?
     
@@ -22,4 +22,5 @@ class CastomButton: UIButton {
     }
     
 }
+
 

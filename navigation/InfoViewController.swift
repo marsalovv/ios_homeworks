@@ -4,8 +4,8 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    private lazy var button: CastomButton = {
-        let btn = CastomButton(title: "Alert")
+    private lazy var button: CustomButton = {
+        let btn = CustomButton(title: "Alert")
         btn.action = { [weak self] in
             let alert = UIAlertController(title: "Alert!", message: "Следи за собой!", preferredStyle: .alert)
             let okAlertAction = UIAlertAction(title: "OK", style: .default) { (action : UIAlertAction) in
