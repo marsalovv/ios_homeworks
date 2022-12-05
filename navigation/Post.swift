@@ -17,7 +17,7 @@ import Foundation
          self.views = views
      }
 
-    public static func getPostsArray() -> [Post] {
+    public static func makePostsArray() -> [Post] {
 [
             Post(author: "Dog", description: "Я злая собака!!!", image: "dog.jpg", likes: 298, views: 2380),
             Post(author: "Angoric", description: "У меня лапки!", image: "avatar.jpg", likes: 4230, views: 5149),

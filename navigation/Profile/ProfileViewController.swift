@@ -7,7 +7,7 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Data
     
-    let postsArray = Post.getPostsArray()
+    let postsArray = Post.makePostsArray()
     var user: User 
     
     private lazy var profileHV: ProfileHeaderView = {

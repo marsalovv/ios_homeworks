@@ -135,7 +135,6 @@ class LogInViewController: UIViewController {
         contentView.addSubview(logInButton)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
     }
     
     func setupConstrains() {
@@ -173,30 +172,51 @@ class LogInViewController: UIViewController {
     }
     
      private func buttonPress() {
-#if DEBUG
-        let currentUser = TestUserService()
-#else
-        let currentUser = CurrentUserService()
-#endif
-        guard let loginText = email.text else { return }
-        guard let passwordText = password.text else { return }
-        guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: loginText) else {
-            let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с таким именем не найден!", preferredStyle: .alert)
-            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
-            alert.addAction(alertCansel)
-            present(alert, animated: true)
-            return
-        }
-        guard loginDelegate?.check(login: loginText, password: passwordText) == true else {
-            let alert = UIAlertController(title: "Внимание!!!", message: "Не верный пароль!", preferredStyle:.alert)
-            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
-            alert.addAction(alertCansel)
-            present(alert, animated: true)
-            return
-        }
-        
-        let profileNavv = ProfileViewController(user: verifiedUser)
-        self.navigationController?.pushViewController(profileNavv, animated: true)
+                 guard let email = email.text else { return }
+                 guard let password = password.text else { return }
+
+         let viewModel = LoginViewModel()
+         switch viewModel.check(email: email, password: password) {
+         case .usererror:
+             let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с именем \(email) не найден!", preferredStyle: .alert)
+                         let alertCansel = UIAlertAction(title: "OK", style: .cancel)
+                         alert.addAction(alertCansel)
+                         present(alert, animated: true)
+         case .passwordError:
+                         let alert = UIAlertController(title: "Внимание!!!", message: "Не верный пароль!", preferredStyle:.alert)
+                         let alertCansel = UIAlertAction(title: "OK", style: .cancel)
+                         alert.addAction(alertCansel)
+                         present(alert, animated: true)
+         case .successfully:
+             let profileCoordinator = ProfileCoordinator()
+             profileCoordinator.pushProfileViewController(view: self, verifiedUser: viewModel.user!)
+             
+         }
+
+//#if DEBUG
+//        let currentUser = TestUserService()
+//#else
+//        let currentUser = CurrentUserService()
+//#endif
+//        guard let loginText = email.text else { return }
+//        guard let passwordText = password.text else { return }
+//        guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: loginText) else {
+//            let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с таким именем не найден!", preferredStyle: .alert)
+//            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
+//            alert.addAction(alertCansel)
+//            present(alert, animated: true)
+//            return
+//        }
+//        guard loginDelegate?.check(login: loginText, password: passwordText) == true else {
+//            let alert = UIAlertController(title: "Внимание!!!", message: "Не верный пароль!", preferredStyle:.alert)
+//            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
+//            alert.addAction(alertCansel)
+//            present(alert, animated: true)
+//            return
+//        }
+//
+//        let profileNav = ProfileViewController(user: verifiedUser)
+//        self.navigationController?.pushViewController(profileNav, animated: true)
         
     }
     
