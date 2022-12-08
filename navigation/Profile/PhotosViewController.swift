@@ -6,7 +6,6 @@ class PhotosViewController: UIViewController {
     
     //MARK: - Data
     
-    private let imagePF = ImagePublisherFacade()
     private var images: [UIImage] = []
     
     private lazy var collectionview: UICollectionView = {
@@ -33,8 +32,36 @@ class PhotosViewController: UIViewController {
         
         setupConstrayns()
         
-        imagePF.subscribe(self)
-        imagePF.addImagesWithTimer(time: 0.3, repeat: 20)
+        var processedImages = [UIImage]()
+        images = makeImages()
+        let imageProcessor = ImageProcessor()
+        
+        let start = CFAbsoluteTimeGetCurrent()
+        imageProcessor.processImagesOnThread(
+            sourceImages: images,
+            filter: .colorInvert,
+            qos: .utility
+        ) { cgImages in
+            for cgImage in cgImages {
+                processedImages.append(UIImage(cgImage: cgImage!))
+            }
+            let stop = CFAbsoluteTimeGetCurrent()
+            
+            print(start.distance(to: stop))
+            
+            DispatchQueue.main.async { [self] in
+                images = processedImages
+                collectionview.reloadData()
+            }
+            
+        }
+        
+        /* userInteractive = 0.227605938911438
+         background = 0.51882004737854
+         default = 0.34844696521759033
+         userInitiated = 0.27252697944641113
+         utility = 0.39250898361206055 */
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,8 +71,8 @@ class PhotosViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         
-        imagePF.removeSubscription(for: self)
-        imagePF.rechargeImageLibrary()
+        
+        
     }
     
     //MARK: - Private
@@ -104,11 +131,16 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PhotosViewController: ImageLibrarySubscriber {
+extension PhotosViewController {
     
-    func receive(images: [UIImage]) {
-        self.images = images
-        collectionview.reloadData()
+    func makeImages() -> [UIImage]{
+        var array = [UIImage]()
+        for i in 0...19 {
+            
+            array.append(UIImage(named: String(i))!)
+        }
+        
+        return array
     }
     
 }
