@@ -3,6 +3,7 @@
 import UIKit
 
 class InfoViewController: UIViewController {
+    var coordinator: FeedCoordinator?
     
     private lazy var button: CustomButton = {
         let btn = CustomButton(title: "Alert")
@@ -10,15 +11,16 @@ class InfoViewController: UIViewController {
             let alert = UIAlertController(title: "Alert!", message: "Следи за собой!", preferredStyle: .alert)
             let okAlertAction = UIAlertAction(title: "OK", style: .default) { (action : UIAlertAction) in
                 self?.dismiss(animated: true)
-                print("Ok")
+                self?.coordinator?.alertOk()
             }
             let cancelAlertAction = UIAlertAction(title: "Отмена", style: .cancel) { (action : UIAlertAction) in
                 print("Cansel")
             }
-            
+
             alert.addAction(okAlertAction)
             alert.addAction(cancelAlertAction)
             self?.present(alert, animated: true)
+            
 
         }
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 100)

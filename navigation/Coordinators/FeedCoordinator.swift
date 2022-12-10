@@ -1,15 +1,39 @@
 
 import UIKit
 
-class FeedCoordinator: Coordinatable {
+class FeedCoordinator: Coordinator {
     
-    var parentCoordinator: Coordinatable?
-    var children: [Coordinatable] = []
+    var parentCoordinator: Coordinator?
+    var children: [Coordinator] = []
+    var navigationController: UINavigationController
     
-    func start() -> UIViewController {
-        let feedNav = UINavigationController(rootViewController: FeedViewController())
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
+    func start() {
+        let feedNav = FeedViewController()
+        feedNav.coordinator = self
         feedNav.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 1)
- 
-        return feedNav
+        navigationController.pushViewController(feedNav, animated: true)
+    }
+    
+    func openPost() {
+        let postVC = PostViewController()
+        postVC.coordinator = self
+        navigationController.pushViewController(postVC, animated: true)
+    }
+    
+    func postInfo() {
+        let infoVC = InfoViewController()
+        infoVC.coordinator = self
+        navigationController.present(infoVC, animated: true )
+    }
+    
+    func alertOk() {
+        let profileC = ProfileCoordinator(navigationController: navigationController)
+        profileC.start()
     }
 }
+
+

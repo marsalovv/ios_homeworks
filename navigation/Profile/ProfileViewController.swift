@@ -7,6 +7,7 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Data
     
+    var coordinator: ProfileCoordinator?
     let postsArray = Post.makePostsArray()
     var user: User 
     

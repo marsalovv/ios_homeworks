@@ -5,6 +5,8 @@ class FeedViewController: UIViewController {
     
     //MARK: - Data
     
+    var coordinator: FeedCoordinator?
+    
     private lazy var Result: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +35,7 @@ class FeedViewController: UIViewController {
             guard self?.wordTextField.text?.isEmpty == false else { return }
             guard let word = self?.wordTextField.text else {return}
             
-            self?.Result.backgroundColor = FeedModel.shared.check(word: word) ? .green : .red
+            self?.Result.backgroundColor = FeedViewModel.shared.check(word: word) ? .green : .red
         }
         
         return btn
@@ -43,9 +45,9 @@ class FeedViewController: UIViewController {
         let btn = CustomButton(title: "Открыть пост", TitleColor: .cyan)
         btn.backgroundColor = .green
         btn.action = { [weak self] in
-            let postVC = PostViewController()
-            self?.navigationController?.pushViewController(postVC, animated: true)
+            self?.coordinator?.openPost()
         }
+        
 
         return btn
     }()
@@ -64,6 +66,7 @@ class FeedViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .green
         
         setupConstrayns()
+        
     }
     
     private func setupConstrayns() {

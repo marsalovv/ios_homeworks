@@ -9,9 +9,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        appCoordinator = AppCoordinator()
-
-        window?.rootViewController = appCoordinator?.start()
+        let navCon = UINavigationController()
+appCoordinator = AppCoordinator(navigationController: navCon)
+let tab = TabCoordinator(navCon)
+        tab.start()
+        window?.rootViewController = navCon
         window?.makeKeyAndVisible()
 
     }
