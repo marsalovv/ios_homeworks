@@ -27,6 +27,29 @@ class LogInViewController: UIViewController {
         return contentView
     }()
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.style = .medium
+        activity.color = .blue
+        activity.hidesWhenStopped = true
+        activity.shouldGroupAccessibilityChildren = true
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        
+        return activity
+    }()
+    
+    private lazy var brutForceButton: CustomButton = {
+        let btn = CustomButton(title: "BF", TitleColor: .white)
+        btn.backgroundColor = .blue
+        btn.layer.cornerRadius = 17
+        btn.action = { [weak self] in
+            self?.brutForcePassword()
+        }
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
+        return btn
+    }()
+    
     private lazy var logInButton: CustomButton = {
         let button = CustomButton(title: "Войти", TitleColor: .white)
         button.action = { [weak self] in
@@ -137,9 +160,11 @@ class LogInViewController: UIViewController {
         contentView.addSubview(logInButton)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        stackView.addSubview(activityIndicatorView)
+        stackView.addSubview(brutForceButton)
     }
     
-    func setupConstrains() {
+    private func setupConstrains() {
         let safeArie = self.view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -168,8 +193,17 @@ class LogInViewController: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            activityIndicatorView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
+            
+            brutForceButton.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: -8),
+            brutForceButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -8),
+            brutForceButton.heightAnchor.constraint(equalToConstant: 34),
+            brutForceButton.widthAnchor.constraint(equalToConstant: 34)
+            ])
+            
         
     }
     
@@ -192,6 +226,7 @@ class LogInViewController: UIViewController {
         case .successfully:
             coordinator?.pushProfileViewController(verifiedUser: viewModel.user!)
         }
+        
         
         //#if DEBUG
         //        let currentUser = TestUserService()
@@ -217,6 +252,29 @@ class LogInViewController: UIViewController {
         //
         //        let profileNav = ProfileViewController(user: verifiedUser)
         //        self.navigationController?.pushViewController(profileNav, animated: true)
+        
+    }
+    
+    
+    private func randomPassword() -> String {
+        let length = [3, 4].randomElement()!
+        let letters = String().digits + String().letters
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    private func brutForcePassword() {
+        let password = randomPassword()
+        let brutForce = BrutForce()
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        activityIndicatorView.startAnimating()
+        queue.async {
+            brutForce.bruteForce(passwordToUnlock: password)
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.password.text = password
+                self.password.isSecureTextEntry = false
+            }
+        }
         
     }
     
