@@ -7,7 +7,11 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Data
     
-    let postsArray = Post.getPostsArray()
+    var coordinator: ProfileCoordinator?
+    let postsArray = Post.makePostsArray()
+    var user: User
+    private var timer: Timer?
+    
     private lazy var profileHV: ProfileHeaderView = {
         let profileHV = ProfileHeaderView()
         profileHV.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +31,17 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+
+    }
+    
+    
     //MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -42,6 +57,27 @@ class ProfileViewController: UIViewController {
         setupConstrains()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { _ in
+            UIView.animate(withDuration: 1.5, delay: 0, animations: {
+                self.view.backgroundColor = UIColor(
+                    displayP3Red:                                                    CGFloat.random(in: 0...1),
+                    green: CGFloat.random(in: 0...1),
+                    blue: CGFloat.random(in: 0...1),
+                    alpha: CGFloat.random(in: 0.8...1.0)
+                )
+            })
+        })
+        RunLoop.current.add(timer!, forMode: .common)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        self.timer?.invalidate()
+    }
+    
     //MARK: - Private
     
     private func setupConstrains() {
@@ -54,7 +90,9 @@ class ProfileViewController: UIViewController {
         ])
     }
     
+    
 }
+
 
 //MARK: - Datasource/Delegate
 
@@ -93,6 +131,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let header = ProfileHeaderView()
+                         header.setupViewCurrendUser(user: user)
+            
             return header
         } else {
             return nil
@@ -111,6 +151,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             let photoGallery = PhotosViewController()
             navigationController?.pushViewController(photoGallery, animated: true)
+            
         }
     }
 }

@@ -22,7 +22,7 @@ import StorageService
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.backgroundColor = .black
+        image.backgroundColor = .clear
         image.isAccessibilityElement = true
         
         return image
@@ -84,6 +84,7 @@ import StorageService
     
     private func setupContentView() {
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
+        contentView.backgroundColor = .clear
     }
                       
     private func setupConstraints () {
