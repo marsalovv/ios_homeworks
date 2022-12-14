@@ -20,11 +20,15 @@ class ProfileCoordinator: Coordinator {
     }
     
     func pushProfileViewController( verifiedUser: User) {
-        print("asdfasd")
+
         let profileNav = ProfileViewController(user: verifiedUser)
         profileNav.coordinator = self
         navigationController.pushViewController(profileNav, animated: true)
-        
-        
     }
+    
+    func pop() {
+        navigationController.popViewController(animated: true)
+
+    }
+    
 }

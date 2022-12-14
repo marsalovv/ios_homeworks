@@ -202,8 +202,8 @@ class LogInViewController: UIViewController {
             brutForceButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -8),
             brutForceButton.heightAnchor.constraint(equalToConstant: 34),
             brutForceButton.widthAnchor.constraint(equalToConstant: 34)
-            ])
-            
+        ])
+        
         
     }
     
@@ -225,33 +225,15 @@ class LogInViewController: UIViewController {
             present(alert, animated: true)
         case .successfully:
             coordinator?.pushProfileViewController(verifiedUser: viewModel.user!)
+            Timer.scheduledTimer(withTimeInterval: 30, repeats: false, block: { _ in
+                let alert = UIAlertController(title: "Ошибка", message: "срок авторизации истек", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.coordinator?.pop()
+                })
+                alert.addAction(ok)
+                self.navigationController?.present(alert, animated: true)
+            })
         }
-        
-        
-        //#if DEBUG
-        //        let currentUser = TestUserService()
-        //#else
-        //        let currentUser = CurrentUserService()
-        //#endif
-        //        guard let loginText = email.text else { return }
-        //        guard let passwordText = password.text else { return }
-        //        guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: loginText) else {
-        //            let alert = UIAlertController(title: "Внимание!!!", message: "Пользователь с таким именем не найден!", preferredStyle: .alert)
-        //            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
-        //            alert.addAction(alertCansel)
-        //            present(alert, animated: true)
-        //            return
-        //        }
-        //        guard loginDelegate?.check(login: loginText, password: passwordText) == true else {
-        //            let alert = UIAlertController(title: "Внимание!!!", message: "Не верный пароль!", preferredStyle:.alert)
-        //            let alertCansel = UIAlertAction(title: "OK", style: .cancel)
-        //            alert.addAction(alertCansel)
-        //            present(alert, animated: true)
-        //            return
-        //        }
-        //
-        //        let profileNav = ProfileViewController(user: verifiedUser)
-        //        self.navigationController?.pushViewController(profileNav, animated: true)
         
     }
     
@@ -259,7 +241,7 @@ class LogInViewController: UIViewController {
     private func randomPassword() -> String {
         let length = [3, 4].randomElement()!
         let letters = String().digits + String().letters
-      return String((0..<length).map{ _ in letters.randomElement()! })
+        return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     private func brutForcePassword() {
