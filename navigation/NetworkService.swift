@@ -12,7 +12,7 @@ struct NetworkService {
     let appConfiguration: AppConfiguration
     
     static func request(appConfiguration: AppConfiguration) {
-
+        
         var url = URL(string: "")
         
         switch appConfiguration {
@@ -42,6 +42,42 @@ struct NetworkService {
         }
         
         task.resume()
+    }
+    
+    static func requestTitleInfoVC(string: String, completion: @escaping (String) -> Void) {
+        guard let url = URL(string: string) else { return }
+        let request = URLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data,
+                  let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            else { return }
+            do {
+                guard let id = dictionary["id"] as? Int,
+                      let userId = dictionary["userId"] as? Int,
+                      let title = dictionary["title"] as? String,
+                      let completed = dictionary["completed"] as? Bool
+                else { return }
+                
+                let titleModel = TitleModel(userId: userId, id: id, title: title, completed: completed)
+                completion(titleModel.title)
+            } catch {
+                print("error")
+            }
+        }
+        task.resume()
+    }
+    
+    static func requestPlanet(string: String, completion: @escaping (Planet) -> Void) {
+        guard let url = URL(string: string) else { return }
+        let request = URLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: request) {data, _, _ in
+            guard let data = data else { return }
+            guard let planet = try? JSONDecoder().decode(Planet.self, from: data) else {return}
+            
+            completion(planet)
+        }
+        task.resume()
+        
     }
     
 }

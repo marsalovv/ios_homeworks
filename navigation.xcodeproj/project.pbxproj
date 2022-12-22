@@ -49,6 +49,8 @@
 		69E0F0B429225E9C00C89071 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0B329225E9C00C89071 /* LoginInspector.swift */; };
 		69E0F0B8292271F000C89071 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0B7292271F000C89071 /* LoginFactory.swift */; };
 		69E0F0BA2922726300C89071 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0F0B92922726300C89071 /* MyLoginFactory.swift */; };
+		69F4501D29521F9C00D7A8D8 /* TitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4501C29521F9C00D7A8D8 /* TitleModel.swift */; };
+		69F4501F2953410700D7A8D8 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4501E2953410700D7A8D8 /* PlanetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +134,8 @@
 		69E0F0B329225E9C00C89071 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		69E0F0B7292271F000C89071 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		69E0F0B92922726300C89071 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
+		69F4501C29521F9C00D7A8D8 /* TitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModel.swift; sourceTree = "<group>"; };
+		69F4501E2953410700D7A8D8 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,8 @@
 				6936B31B286C6DB300B3FB93 /* AppDelegate.swift */,
 				6936B31D286C6DB300B3FB93 /* SceneDelegate.swift */,
 				6954412E294B3C2B00F19F2F /* NetworkService.swift */,
+				69F4501C29521F9C00D7A8D8 /* TitleModel.swift */,
+				69F4501E2953410700D7A8D8 /* PlanetModel.swift */,
 				6935486E2938E6D800EA75E0 /* Coordinators */,
 				6936B32F286C7F3900B3FB93 /* FeedViewController.swift */,
 				69ACFCC6292CE2EC0006B97D /* FeedModel.swift */,
@@ -465,6 +471,7 @@
 				69ACFCC7292CE2EC0006B97D /* FeedModel.swift in Sources */,
 				698F60DC2944D597005E419E /* FeedViewModel.swift in Sources */,
 				69E0F0BA2922726300C89071 /* MyLoginFactory.swift in Sources */,
+				69F4501F2953410700D7A8D8 /* PlanetModel.swift in Sources */,
 				69BE55B5293B87A500610825 /* Module.swift in Sources */,
 				6954412F294B3C2B00F19F2F /* NetworkService.swift in Sources */,
 				6936B31C286C6DB300B3FB93 /* AppDelegate.swift in Sources */,
@@ -477,6 +484,7 @@
 				693548702938E88A00EA75E0 /* CoordinatorProtocol.swift in Sources */,
 				69DC3CBE2938DA9B00D67CD2 /* TabCoordinator.swift in Sources */,
 				696846802871CEAB000DE059 /* InfoViewController.swift in Sources */,
+				69F4501D29521F9C00D7A8D8 /* TitleModel.swift in Sources */,
 				6936B332286C7F4A00B3FB93 /* ProfileViewController.swift in Sources */,
 				6936B330286C7F3900B3FB93 /* FeedViewController.swift in Sources */,
 				69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */,
