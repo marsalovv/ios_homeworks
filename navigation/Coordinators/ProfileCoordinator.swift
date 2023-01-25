@@ -19,12 +19,18 @@ class ProfileCoordinator: Coordinator {
         navigationController.pushViewController(loginVC, animated: true)
     }
     
-    func pushProfileViewController( verifiedUser: User) {
-        print("asdfasd")
+    func pushProfileViewController(verifiedUser: User) {
+
         let profileNav = ProfileViewController(user: verifiedUser)
         profileNav.coordinator = self
         navigationController.pushViewController(profileNav, animated: true)
         
         
+    }
+    
+    func skipAuthorization(user: RealmUserModel) {
+        let verifiedUser = User(login: user.email, fullName: user.email, status: user.description, avatar: UIImage(named: "avatar")!)
+        let profileVC = ProfileViewController(user: verifiedUser)
+        navigationController.setViewControllers([profileVC], animated: false)
     }
 }

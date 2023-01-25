@@ -3,6 +3,7 @@
 import UIKit
 import FirebaseAuth
 
+
 class LogInViewController: UIViewController {
     
     //MARK: -Data
@@ -131,6 +132,10 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
+        if let user = RealmManager.manager.userSave() {
+            coordinator?.skipAuthorization(user: user)
+        }
+        
         
         addSubViews()
         setupConstrains()
@@ -206,28 +211,36 @@ class LogInViewController: UIViewController {
         guard let email = email.text else { return }
         guard let password = password.text else { return }
         
-        delegate = LoginInspector()
-        delegate?.checkCredentials(email: email, password: password) {[weak self] authDataResult, error in
-            if let user = authDataResult?.user {
-                self?.coordinator?.pushProfileViewController(verifiedUser: User(
-                    login: user.email!,
-                    fullName: user.email!,
-                    status: user.uid,
-                    avatar: UIImage(named: "avatar")!))
-            }
-            if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "ok", style: .cancel)
-                alert.addAction(action)
-                self?.navigationController?.present(alert, animated: true)
-            }
-        }
+         let user = RealmManager.manager.login(email: email, password: password)
+        coordinator?.pushProfileViewController(verifiedUser: User(
+            login: user.email,
+            fullName: user.email,
+            status: user.description,
+            avatar: UIImage(named: "avatar")!
+        ))
         
-        
-        
-        
-        
-        //        let viewModel = LoginViewModel()
+//        delegate = LoginInspector()
+//        delegate?.checkCredentials(email: email, password: password) {[weak self] authDataResult, error in
+//            if let user = authDataResult?.user {
+//                self?.coordinator?.pushProfileViewController(verifiedUser: User(
+//                    login: user.email!,
+//                    fullName: user.email!,
+//                    status: user.uid,
+//                    avatar: UIImage(named: "avatar")!))
+//            }
+//            if let error = error {
+//                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                let action = UIAlertAction(title: "ok", style: .cancel)
+//                alert.addAction(action)
+//                self?.navigationController?.present(alert, animated: true)
+//            }
+//        }
+//
+//
+//
+//
+//
+//        //        let viewModel = LoginViewModel()
         //
         //        switch viewModel.check(email: email, password: password) {
         //        case .usererror:
@@ -274,7 +287,10 @@ class LogInViewController: UIViewController {
     @objc private func pressCreateButton() {
         guard let email = email.text else { return }
         guard let password = password.text else { return }
-        
+        RealmManager.manager.deleteAll()
+
+
+/*
         delegate = LoginInspector()
         delegate?.signUp(email: email, password: password) {[weak self] authDataResult, error in
             if let user = authDataResult?.user {
@@ -291,7 +307,7 @@ class LogInViewController: UIViewController {
                 self?.navigationController?.present(alert, animated: true)
             }
         }
-        
+        */
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
