@@ -12,3 +12,4 @@ class RealmUserModel: Object {
         self.password = password
     }
 }
+

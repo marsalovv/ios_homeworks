@@ -132,6 +132,8 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
+        
+        
         if let user = RealmManager.manager.userSave() {
             coordinator?.skipAuthorization(user: user)
         }

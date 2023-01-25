@@ -33,4 +33,5 @@ class RealmManager {
             realm.deleteAll()
         }
     }
+    
 }
