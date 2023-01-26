@@ -9,8 +9,7 @@ class ProfileViewController: UIViewController {
     
     var coordinator: ProfileCoordinator?
     let postsArray = Post.makePostsArray()
-    var user: User 
-    
+    var user: User
     private lazy var profileHV: ProfileHeaderView = {
         let profileHV = ProfileHeaderView()
         profileHV.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +93,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         default :
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostTableViewCell
-            cell.setupCell(postsArray[indexPath.row])
+            let post = postsArray[indexPath.row]
+            cell.action = {
+                CoreDataManager.manager.addFavorites(post: post)
+            }
+            cell.setupCell(post)
+
             return cell
         }
         
@@ -128,5 +132,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             let photoGallery = PhotosViewController()
             navigationController?.pushViewController(photoGallery, animated: true)
         }
+    
     }
+    
+
+    
 }

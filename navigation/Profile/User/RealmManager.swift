@@ -32,6 +32,20 @@ class RealmManager {
         try! realm.write {
             realm.deleteAll()
         }
+        
+    }
+    func delete(email: String, password: String) {
+        let realm = try! Realm()
+        let object = realm.objects(RealmUserModel.self)
+        try! realm.write {
+            realm.delete(object)
+        }
+    }
+
+    
+    func printCount() {
+        let realm = try! Realm()
+        print(realm.objects(RealmUserModel.self))
     }
     
 }

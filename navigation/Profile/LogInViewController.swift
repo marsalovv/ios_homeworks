@@ -134,6 +134,7 @@ class LogInViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         
+        
         if let user = RealmManager.manager.userSave() {
             coordinator?.skipAuthorization(user: user)
         }
@@ -289,7 +290,9 @@ class LogInViewController: UIViewController {
     @objc private func pressCreateButton() {
         guard let email = email.text else { return }
         guard let password = password.text else { return }
-        RealmManager.manager.deleteAll()
+        RealmManager.manager.printCount()
+        RealmManager.manager.delete(email: email, password: password)
+        RealmManager.manager.printCount()
 
 
 /*

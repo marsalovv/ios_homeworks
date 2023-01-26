@@ -24,6 +24,7 @@ class AppCoordinator: Coordinator {
 
 enum TabBarPage {
     case feed
+    case favorites
     case login
     
 
@@ -32,6 +33,8 @@ enum TabBarPage {
         case 0:
             self = .feed
         case 1:
+            self = .favorites
+        case 2:
             self = .login
         default:
             return nil
@@ -42,6 +45,8 @@ enum TabBarPage {
         switch self {
         case .feed :
             return "Feed"
+        case .favorites:
+            return "Избранное"
         case .login :
             return "Аккаунт"
         }
@@ -51,8 +56,10 @@ enum TabBarPage {
         switch self {
         case .feed :
             return 0
-        case .login :
+        case .favorites:
             return 1
+        case .login :
+            return 2
         }
     }
 
@@ -88,7 +95,7 @@ class TabCoordinator: Coordinator {
     func start() {
         //Давайте определим, какие страницы мы хотим добавить в панель вкладок
         
-        let pages: [TabBarPage] = [.feed, .login]
+        let pages: [TabBarPage] = [.feed, .favorites, .login]
             //.sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
         
         //Инициализация ViewControllers или этих страниц
@@ -131,6 +138,11 @@ class TabCoordinator: Coordinator {
 //            navController.pushViewController(feedVC, animated: true)
             let feedC = FeedCoordinator(navigationController: navController)
             feedC.start()
+        case .favorites:
+            let favoritesVC = FavoritesTableViewController()
+            favoritesVC.title = "Избранное"
+            navController.pushViewController(favoritesVC, animated: true)
+            
 
         case .login:
 //            let loginVC = LogInViewController()

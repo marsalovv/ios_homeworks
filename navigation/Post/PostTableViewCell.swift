@@ -6,6 +6,8 @@ import StorageService
     
     //MARK: - Data
     
+        var action: (() -> ())?
+        
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
@@ -80,7 +82,19 @@ import StorageService
         descriptionLabel.text = post.description
         likesLabel.text = "Лайки: \(String(post.likes))"
         viewsLabel.text = "Просмотры: \(String(post.views))"
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapAction))
+        doubleTap.numberOfTapsRequired = 2
+        self.addGestureRecognizer(doubleTap)
     }
+        
+        func setupCell(_ post: PostCD) {
+            self.authorLabel.text = post.author
+            self.descriptionLabel.text = post.descriptionPost
+            self.castomImageView.image = UIImage(named: (post.image)!)
+            self.likesLabel.text = "лайков: \(String(post.likes))"
+            self.viewsLabel.text = "просмотров: \(String(post.viewsCount))"
+        }
     
     private func setupContentView() {
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
@@ -114,6 +128,10 @@ import StorageService
         ])
             
     }
+        
+        @objc private func doubleTapAction() {
+            action?()
+        }
                       
 }
                     

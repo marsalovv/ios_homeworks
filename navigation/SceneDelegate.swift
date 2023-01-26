@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         let navCon = UINavigationController()
+    
 let tab = TabCoordinator(navCon)
         tab.start()
         window?.rootViewController = navCon

@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  navigation
-//
-//  Created by Сергей Марсалов on 29.06.2022.
-//
 
 import UIKit
 import FirebaseCore
