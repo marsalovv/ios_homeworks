@@ -31,7 +31,9 @@ struct NetworkService {
                   let dictionary = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let response = response as? HTTPURLResponse
             else  {
-                print(error?.localizedDescription) //The Internet connection appears to be offline.
+                if let error = error {
+                    print(error.localizedDescription)
+                }//The Internet connection appears to be offline.
                 return
             }
             
@@ -51,7 +53,7 @@ struct NetworkService {
             guard let data = data,
                   let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             else { return }
-            do {
+            
                 guard let id = dictionary["id"] as? Int,
                       let userId = dictionary["userId"] as? Int,
                       let title = dictionary["title"] as? String,
@@ -60,9 +62,8 @@ struct NetworkService {
                 
                 let titleModel = TitleModel(userId: userId, id: id, title: title, completed: completed)
                 completion(titleModel.title)
-            } catch {
-                print("error")
-            }
+
+             
         }
         task.resume()
     }

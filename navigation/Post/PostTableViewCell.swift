@@ -6,7 +6,8 @@ import StorageService
     
     //MARK: - Data
     
-        var action: (() -> ())?
+        var action:  (()  -> Void)?
+        var isFavorite: Bool = false
         
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
@@ -131,7 +132,16 @@ import StorageService
         
         @objc private func doubleTapAction() {
             action?()
-        }
+            
+            let saveDescription = descriptionLabel.text
+            descriptionLabel.text = "Добавили в избранное"
+            
+            
+            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) {_ in
+                UIAccessibility.post(notification: .announcement, argument: "Добавили в избранное")
+                self.descriptionLabel.text = saveDescription
+            }
+            }
                       
 }
                     

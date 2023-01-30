@@ -94,6 +94,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         default :
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostTableViewCell
             let post = postsArray[indexPath.row]
+            print("Назначаем действие")
             cell.action = {
                 CoreDataManager.manager.addFavorites(post: post)
             }
