@@ -1,10 +1,21 @@
 
 import UIKit
+import CoreData
 
 class FavoritesTableViewController: UITableViewController {
     
-    private var filter: String = ""
-    private var posts: [PostCD]? = CoreDataManager.manager.makeFavoritesPosts()
+    var fetchedResultController: NSFetchedResultsController<PostCD>!
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        initFetchedResultController()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,6 +23,21 @@ class FavoritesTableViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Фильтр", style: .plain, target: self, action: #selector(addFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Показать все", style: .done, target: self, action: #selector(clearFilter))
+    }
+    
+    private func initFetchedResultController() {
+        let fetchRequest = PostCD.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "likes", ascending: false)]
+        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                             managedObjectContext: CoreDataManager.manager.context,
+                                                             sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultController.delegate = self
+        
+        do{
+            try fetchedResultController.performFetch()
+        } catch{
+            print(error)
+        }
     }
     
     
@@ -24,8 +50,13 @@ class FavoritesTableViewController: UITableViewController {
         
         let done = UIAlertAction(title: "Применить", style: .default) {_ in
             guard let text = alert.textFields?[0].text else {return}
-            self.filter = text
-            self.reloadPosts(filter: self.filter)
+            self.fetchedResultController.fetchRequest.predicate = NSPredicate(format: "author contains[c] %@", text)
+            do{
+                try self.fetchedResultController.performFetch()
+            }catch{
+                print(error)
+            }
+            
             self.tableView.reloadData()
             alert.dismiss(animated: true)
         }
@@ -34,53 +65,62 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     @objc private func clearFilter() {
-        filter = ""
-        reloadPosts(filter: filter)
+        fetchedResultController.fetchRequest.predicate = nil
+        do{
+            try fetchedResultController.performFetch()
+        }catch{
+            print(error)
+        }
+        
         tableView.reloadData()
     }
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadPosts(filter: filter)
+        do{
+            try fetchedResultController.performFetch()
+        }catch{
+            print(error)
+        }
+        
         tableView.reloadData()
     }
     
-    private func reloadPosts(filter: String = "") {
-        posts = CoreDataManager.manager.makeFavoritesPosts(filter: filter)
-    }
-    
+
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        if let sections = fetchedResultController.sections {
+            return sections.count
+        }else{
+            return 1
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = posts?.count else {return 0}
+        guard let count = fetchedResultController.fetchedObjects?.count else {return 0}
         return count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "cell") as! PostTableViewCell
-        guard let post = posts?[indexPath.row] else {return cell}
+        let post = fetchedResultController.object(at: indexPath)
         cell.setupCell(post)
-        
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "delete") {action, view, completion in
-            guard let post = self.posts?[indexPath.row] else {return}
+            let post = self.fetchedResultController.object(at: indexPath)
             CoreDataManager.manager.deleteFromFavorites(post: post)
             
-            self.reloadPosts()
             tableView.reloadData()
             completion(true)
         }
-        
         
         return UISwipeActionsConfiguration(actions: [action])
     }
@@ -133,3 +173,25 @@ class FavoritesTableViewController: UITableViewController {
     
 }
 
+
+//MARK: Fetched Result controller delegate
+
+extension FavoritesTableViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type{
+        case .insert:
+            tableView.insertRows(at: [indexPath!], with: .automatic)
+        case .update:
+            tableView.reloadData()
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        @unknown default:
+            tableView.reloadData()
+        }
+    }
+    
+    
+}

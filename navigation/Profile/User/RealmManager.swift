@@ -9,6 +9,7 @@ class RealmManager {
         let config = Realm.Configuration(schemaVersion: 2)
         Realm.Configuration.defaultConfiguration = config
     }
+    
     func userSave() -> RealmUserModel? {
         let realm = try! Realm()
         for user in realm.objects(RealmUserModel.self) {

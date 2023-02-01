@@ -7,7 +7,8 @@ import StorageService
 class CoreDataManager {
     
     static let manager = CoreDataManager()
-    private var container: NSPersistentContainer = {
+    
+    var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -17,17 +18,10 @@ class CoreDataManager {
         return container
     }()
     
-    
-    private var context: NSManagedObjectContext {container.viewContext}
-    //private var backgroundContext: NSManagedObjectContext {container.newBackgroundContext()}
-    
-    
-    
-    
-    
+    var context: NSManagedObjectContext {container.viewContext}
     
     func addFavorites(post: Post) {
-        container.performBackgroundTask { backgroundContext in
+        container.performBackgroundTask {backgroundContext in
             let fetchRequest = PostCD.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "descriptionPost == %@", post.description)
             let posts = try! backgroundContext.fetch(fetchRequest)
@@ -43,20 +37,20 @@ class CoreDataManager {
                 postCD.likes = Int64(post.likes)
                 postCD.viewsCount = Int64(post.views)
                 
-                try? backgroundContext.save()
+                try! backgroundContext.save()
             }
-
+            
         }
-        }
+        
+    }
     
     func makeFavoritesPosts(filter: String = "") -> [PostCD]? {
-
         let fetchRequest = PostCD.fetchRequest()
         if filter.isEmpty != true {
             fetchRequest.predicate = NSPredicate(format: "author == %@", filter)
         }
         
-        let postCDS = try? container.viewContext.fetch(fetchRequest)
+        let postCDS = try? context.fetch(fetchRequest)
         return postCDS
     }
     
@@ -68,7 +62,8 @@ class CoreDataManager {
     private func saveContext () {
         if context.hasChanges {
             do {
-                try context.save()
+                
+                try container.viewContext.save()
             } catch {
                 context.rollback()
                 let nserror = error as NSError
@@ -77,10 +72,9 @@ class CoreDataManager {
         }
     }
     
-     func deleteAll() {
+    func deleteAll() {
         do {
             try context.execute(NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: "PostCD")))
-            
         } catch {
         }
         try? context.save()
