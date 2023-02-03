@@ -10,13 +10,14 @@ class RealmManager {
         config.encryptionKey = getKey()
         
         do{
-            let realm = try Realm(configuration: config)
-            Realm.Configuration.defaultConfiguration = config
+            let _ = try Realm(configuration: config)
         }catch{
             try? FileManager.default.removeItem(at: config.fileURL!)
-            Realm.Configuration.defaultConfiguration = config
         }
+        
+        Realm.Configuration.defaultConfiguration = config
     }
+    
     func userSave() -> RealmUserModel? {
         let realm = try! Realm()
         for user in realm.objects(RealmUserModel.self) {
