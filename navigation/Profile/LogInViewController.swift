@@ -287,8 +287,8 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func pressCreateButton() {
-        guard let email = email.text else { return }
-        guard let password = password.text else { return }
+//        guard let email = email.text else { return }
+//        guard let password = password.text else { return }
         RealmManager.manager.deleteAll()
 
 

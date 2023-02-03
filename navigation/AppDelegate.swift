@@ -16,8 +16,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-
         return true
+        
+//        var key = Data(count: 64)
+//        _ = key.withUnsafeMutableBytes { bytes in
+//          SecRandomCopyBytes(kSecRandomDefault, 64, bytes)
+//        }
+//
+//        let keychainItemQuery = [
+//             kSecValueData: key,
+//             kSecClass: kSecClassKey
+//         ] as CFDictionary
+//
+//         let status = SecItemAdd(keychainItemQuery, nil)
+//         print("Operation finished with status: \(status)")
+//
+//
+//        let tag = "RealmKey".data(using: .utf8)!
+//        let addquery: [String: Any] = [kSecClass as String: kSecClassKey,
+//                                       kSecAttrApplicationTag as String: tag,
+//                                       kSecValueData as String: key]
+
     }
 
     // MARK: UISceneSession Lifecycle
