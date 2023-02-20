@@ -104,8 +104,11 @@ extension MapViewController: CLLocationManagerDelegate {
             
             let currentLocationAnnotation = MKPointAnnotation()
             currentLocationAnnotation.coordinate = location.coordinate
-            currentLocationAnnotation.title = "Вы сдесь"
-            mapView.addAnnotation(currentLocationAnnotation)
+            currentLocationAnnotation.title = "Вы здесь"
+            
+            if mapView.isUserLocationVisible {
+                mapView.addAnnotation(currentLocationAnnotation)
+            }
      
 
         }
