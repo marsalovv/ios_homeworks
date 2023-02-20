@@ -215,6 +215,7 @@ class LogInViewController: UIViewController {
         guard let password = password.text else { return }
         
          let user = RealmManager.manager.login(email: email, password: password)
+        
         coordinator?.pushProfileViewController(verifiedUser: User(
             login: user.email,
             fullName: user.email,

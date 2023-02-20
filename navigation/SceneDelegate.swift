@@ -19,7 +19,7 @@ let tab = TabCoordinator(navCon)
         window?.rootViewController = navCon
         window?.makeKeyAndVisible()
         
-        networkService()
+        //networkService()
 
     }
     
