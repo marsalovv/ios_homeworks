@@ -21,8 +21,8 @@ class FavoritesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "cell")
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Фильтр", style: .plain, target: self, action: #selector(addFilter))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Показать все", style: .done, target: self, action: #selector(clearFilter))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: String(localized: "FavoritesTVC rightBarButtonItem"), style: .plain, target: self, action: #selector(addFilter))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: String(localized: "FavoritesTVC leftBarButtonItem"), style: .done, target: self, action: #selector(clearFilter))
     }
     
     private func initFetchedResultController() {

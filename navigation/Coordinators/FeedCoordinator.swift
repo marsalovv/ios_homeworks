@@ -20,6 +20,7 @@ class FeedCoordinator: Coordinator {
     
     func openPost() {
         let postVC = PostViewController()
+        print("push post")
         postVC.coordinator = self
         navigationController.pushViewController(postVC, animated: true)
     }

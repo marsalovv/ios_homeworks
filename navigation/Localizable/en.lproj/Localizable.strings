@@ -1,0 +1,16 @@
+//FeedViewController
+"title FeedVC" = "Feed";
+"FeedVC wordTextField" = "Entering word";
+"FeedVC checkGuessButton" = "Check";
+"FeedVC openPostButton" = "Open post";
+//FavoritesTableViewController
+"title FavoritesTVC" = "Favorites";
+"FavoritesTVC rightBarButtonItem" = "Filter";
+"FavoritesTVC leftBarButtonItem" = "Show all";
+//MapViewController
+"title MapVC" = "Map";
+"MapVC currentLocationAnnotation" = "You are here";
+//LoginViewController
+"title LoginVC" = "Account";
+"LoginVC loginButton" = "LogIn";
+

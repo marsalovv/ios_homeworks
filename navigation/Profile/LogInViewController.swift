@@ -31,7 +31,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var logInButton: CustomButton = {
-        let button = CustomButton(title: "Вход", TitleColor: .white)
+        let button = CustomButton(title: String(localized: "LoginVC loginButton"), TitleColor: .white)
         button.action = { [weak self] in
             self?.pressLoginButton()
         }

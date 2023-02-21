@@ -17,7 +17,7 @@ class FeedViewController: UIViewController {
     private lazy var wordTextField: UITextField = {
         let wtf = UITextField()
         wtf.delegate = self
-        wtf.placeholder = "Введите слово"
+        wtf.placeholder = String(localized: "FeedVC wordTextField")
         wtf.textColor = .black
         wtf.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         wtf.layer.borderWidth = 0.5
@@ -30,7 +30,7 @@ class FeedViewController: UIViewController {
     }()
     
     private lazy var checkGuessButton: CustomButton = {
-        let btn = CustomButton(title: "Проверить", TitleColor: .green)
+        let btn = CustomButton(title: String(localized: "FeedVC checkGuessButton"), TitleColor: .green)
         btn.action = { [weak self] in
             guard self?.wordTextField.text?.isEmpty == false else { return }
             guard let word = self?.wordTextField.text else {return}
@@ -41,10 +41,11 @@ class FeedViewController: UIViewController {
         return btn
     }()
     
-    private lazy var button: CustomButton = {
-        let btn = CustomButton(title: "Открыть пост", TitleColor: .cyan)
+    private lazy var openPostButton: CustomButton = {
+        let btn = CustomButton(title: String(localized: "FeedVC openPostButton"), TitleColor: .cyan)
         btn.backgroundColor = .green
         btn.action = { [weak self] in
+
             self?.coordinator?.openPost()
         }
         
@@ -57,9 +58,8 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Feed"
         view.backgroundColor = .systemBackground
-        view.addSubview(button)
+        view.addSubview(openPostButton)
         view.addSubview(wordTextField)
         view.addSubview(checkGuessButton)
         view.addSubview(Result)
@@ -71,8 +71,8 @@ class FeedViewController: UIViewController {
     
     private func setupConstrayns() {
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor   ),
-            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            openPostButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor   ),
+            openPostButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             wordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             wordTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -60),

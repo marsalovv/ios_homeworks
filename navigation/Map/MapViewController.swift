@@ -35,16 +35,15 @@ class MapViewController: UIViewController {
         
         return mapView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-
         view.addSubview(mapView)
         setupConstraints()
+        
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-        
     }
     
     @objc private func addAnnotation(gestureRecognizer: UIGestureRecognizer) {
@@ -57,7 +56,7 @@ class MapViewController: UIViewController {
             
             guard let myCoordinates = locationManager.location?.coordinate else {return}
             buildRouteOnMap(myLocation: myCoordinates, destination: coordinates)
-
+            
         }
         
     }
@@ -89,7 +88,7 @@ class MapViewController: UIViewController {
         ])
     }
     
-
+    
 }
 
 //MARK: Location manager delegate
@@ -104,13 +103,8 @@ extension MapViewController: CLLocationManagerDelegate {
             
             let currentLocationAnnotation = MKPointAnnotation()
             currentLocationAnnotation.coordinate = location.coordinate
-            currentLocationAnnotation.title = "Вы здесь"
-            
-            if mapView.isUserLocationVisible {
-                mapView.addAnnotation(currentLocationAnnotation)
-            }
-     
-
+            currentLocationAnnotation.title = String(localized: "MapVC currentLocationAnnotation")
+            mapView.addAnnotation(currentLocationAnnotation)
         }
     }
     

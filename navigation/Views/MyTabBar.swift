@@ -13,11 +13,6 @@ class MyTabBar: UITabBarController {
         self.loginNav = LogInViewController()
         self.mapVC = MapViewController()
         self.favoritesTVC = FavoritesTableViewController()
-        feedNav.title = "feed"
-        favoritesTVC.title = "Избранное"
-        mapVC.title = "Карта"
-        mapVC.tabBarItem = UITabBarItem(title: "Карта", image: UIImage(systemName: "map.circle"), selectedImage: UIImage(systemName: "map.circle.fill"))
-        loginNav.title = "login"
         
         super.init(nibName: nil, bundle: nil)
     }

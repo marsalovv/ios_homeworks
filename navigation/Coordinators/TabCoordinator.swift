@@ -102,7 +102,7 @@ class TabCoordinator: Coordinator {
     func start() {
         //Давайте определим, какие страницы мы хотим добавить в панель вкладок
         
-        let pages: [TabBarPage] = [.map, .feed, .favorites, .login]
+        let pages: [TabBarPage] = [.feed, .favorites, .map, .login]
             //.sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
         
         //Инициализация ViewControllers или этих страниц
@@ -141,27 +141,26 @@ class TabCoordinator: Coordinator {
         switch page {
         case .feed :
             //При необходимости: каждый поток панели вкладок может иметь своего собственного координатора.
-//            let feedVC = FeedViewController()
-//            navController.pushViewController(feedVC, animated: true)
-            let feedC = FeedCoordinator(navigationController: navController)
-            feedC.start()
+            let feedVC = FeedViewController()
+            feedVC.title = String(localized: "title FeedVC")
+            navController.pushViewController(feedVC, animated: true)
+//            let feedC = FeedCoordinator(navigationController: navController)
+//            feedC.start()
         case .favorites:
             let favoritesVC = FavoritesTableViewController()
-            favoritesVC.title = "Избранное"
+            favoritesVC.title = String(localized: "title FavoritesTVC")
             navController.pushViewController(favoritesVC, animated: true)
         case .map:
             let mapVC = MapViewController()
-            mapVC.title = "Карта"
-            mapVC.tabBarItem = UITabBarItem(title: "Карта", image: UIImage(systemName: "map.circle"), selectedImage: UIImage(systemName: "map.circle.fill"))
-
-            
+            mapVC.title = String(localized: "title MapVC")
+            mapVC.tabBarItem = UITabBarItem(title: String(localized: "title MapVC"), image: UIImage(systemName: "map.circle"), selectedImage: UIImage(systemName: "map.circle.fill"))
             navController.pushViewController(mapVC, animated: true)
-
         case .login:
-//            let loginVC = LogInViewController()
-//            navController.pushViewController(loginVC, animated: true)
-            let loginC = ProfileCoordinator(navigationController: navController)
-            loginC.start()
+            let loginVC = LogInViewController()
+            loginVC.title = String(localized: "title LoginVC")
+            navController.pushViewController(loginVC, animated: true)
+//            let loginC = ProfileCoordinator(navigationController: navController)
+//            loginC.start()
         }
         return navController
     }
