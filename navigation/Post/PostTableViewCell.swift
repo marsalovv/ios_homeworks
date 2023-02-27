@@ -2,17 +2,17 @@
 import UIKit
 import StorageService
 
-    class PostTableViewCell: UITableViewCell {
+class PostTableViewCell: UITableViewCell {
     
     //MARK: - Data
     
-        var action:  (()  -> Void)?
-        var isFavorite: Bool = false
-        
+    var action:  (()  -> Void)?
+    var isFavorite: Bool = false
+    
     private lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
-        author.textColor = .black
+        author.textColor = .Pallete.black
         author.numberOfLines = 2
         author.isAccessibilityElement = true
         author.accessibilityTraits = .header
@@ -47,7 +47,7 @@ import StorageService
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.isAccessibilityElement = true
         likes.font = .systemFont(ofSize: 16, weight: .regular)
-        likes.textColor = .black
+        likes.textColor = .Pallete.black
         
         return likes
     }()
@@ -56,13 +56,13 @@ import StorageService
         let views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         views.font = .systemFont(ofSize: 16, weight: .regular)
-        views.textColor = .black
+        views.textColor = .Pallete.black
         views.isAccessibilityElement = true
         
         return views
     }()
     
-        //MARK: - Init
+    //MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -88,20 +88,20 @@ import StorageService
         doubleTap.numberOfTapsRequired = 2
         self.addGestureRecognizer(doubleTap)
     }
-        
-        func setupCell(_ post: PostCD) {
-            self.authorLabel.text = post.author
-            self.descriptionLabel.text = post.descriptionPost
-            self.castomImageView.image = UIImage(named: (post.image)!)
-            self.likesLabel.text = "лайков: \(String(post.likes))"
-            self.viewsLabel.text = "просмотров: \(String(post.viewsCount))"
-        }
+    
+    func setupCell(_ post: PostCD) {
+        self.authorLabel.text = post.author
+        self.descriptionLabel.text = post.descriptionPost
+        self.castomImageView.image = UIImage(named: (post.image)!)
+        self.likesLabel.text = "лайков: \(String(post.likes))"
+        self.viewsLabel.text = "просмотров: \(String(post.viewsCount))"
+    }
     
     private func setupContentView() {
         [authorLabel, descriptionLabel, castomImageView, likesLabel, viewsLabel].forEach {contentView.addSubview($0)}
         contentView.backgroundColor = .clear
     }
-                      
+    
     private func setupConstraints () {
         NSLayoutConstraint.activate([
             authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -127,21 +127,21 @@ import StorageService
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
         ])
-            
-    }
         
-        @objc private func doubleTapAction() {
-            action?()
-
-            let saveDescription = descriptionLabel.text
-            descriptionLabel.text = "Добавили в избранное"
-            
-            
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {_ in
-                UIAccessibility.post(notification: .announcement, argument: "Добавили в избранное")
-                self.descriptionLabel.text = saveDescription
-            }
-            }
-                      
+    }
+    
+    @objc private func doubleTapAction() {
+        action?()
+        
+        let saveDescription = descriptionLabel.text
+        descriptionLabel.text = "Добавили в избранное"
+        
+        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {_ in
+            UIAccessibility.post(notification: .announcement, argument: "Добавили в избранное")
+            self.descriptionLabel.text = saveDescription
+        }
+    }
+    
 }
-                    
+

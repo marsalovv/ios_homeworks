@@ -9,8 +9,8 @@ protocol LoginViewModuleProtocol {
 class LoginViewModel: LoginViewModuleProtocol {
     
     var user: User?
-
-
+    
+    
     enum UserVerification {
         case usererror
         case passwordError
@@ -24,11 +24,11 @@ class LoginViewModel: LoginViewModuleProtocol {
         let currentUser = CurrentUserService()
 #endif
         guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: email) else { return .usererror }
-
+        
         let factory = MyLoginFactory()
         let loginDelegate = factory.makeLoginInspector()
         guard loginDelegate.check(login: email, password: password) == true else { return .passwordError }
-    
+        
         user = verifiedUser
         return .successfully
     }

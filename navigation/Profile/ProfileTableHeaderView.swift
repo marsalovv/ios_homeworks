@@ -8,7 +8,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var castomView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .Pallete.white
         view.alpha = 0.0
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -32,7 +32,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatar.clipsToBounds = true
         avatar.layer.cornerRadius = 50
         avatar.layer.borderWidth = 3
-        avatar.layer.borderColor = UIColor.white.cgColor
+        avatar.layer.borderColor = UIColor.lightGray.cgColor
         avatar.isAccessibilityElement = true
         avatar.accessibilityLabel = "avatar"
         avatar.isUserInteractionEnabled = true
@@ -44,7 +44,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var  nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.textColor = .Pallete.black
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -53,8 +53,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        status.textColor = UIColor.gray
-        status.backgroundColor = .white
+        status.textColor = .Pallete.black
+        status.backgroundColor = .systemFill
         status.translatesAutoresizingMaskIntoConstraints = false
         
         return status
@@ -81,7 +81,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        textField.textColor = UIColor.black
+        textField.textColor = .Pallete.black
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.layer.cornerRadius = 12.0
         textField.layer.borderWidth = 1.0

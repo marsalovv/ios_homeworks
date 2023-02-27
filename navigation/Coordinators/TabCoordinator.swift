@@ -156,11 +156,11 @@ class TabCoordinator: Coordinator {
             mapVC.tabBarItem = UITabBarItem(title: String(localized: "title MapVC"), image: UIImage(systemName: "map.circle"), selectedImage: UIImage(systemName: "map.circle.fill"))
             navController.pushViewController(mapVC, animated: true)
         case .login:
-            let loginVC = LogInViewController()
-            loginVC.title = String(localized: "title LoginVC")
-            navController.pushViewController(loginVC, animated: true)
-//            let loginC = ProfileCoordinator(navigationController: navController)
-//            loginC.start()
+//            let loginVC = LogInViewController()
+//            loginVC.title = String(localized: "title LoginVC")
+//            navController.pushViewController(loginVC, animated: true)
+            let loginC = ProfileCoordinator(navigationController: navController)
+            loginC.start()
         }
         return navController
     }

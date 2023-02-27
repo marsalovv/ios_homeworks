@@ -16,6 +16,7 @@ class ProfileCoordinator: Coordinator {
         let loginVC = LogInViewController()
         loginVC.loginDelegate = loginInspector
         loginVC.coordinator = self
+        loginVC.title = String(localized: "title LoginVC")
         navigationController.pushViewController(loginVC, animated: true)
     }
     

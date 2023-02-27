@@ -77,7 +77,7 @@ class LogInViewController: UIViewController {
         email.placeholder = "Email or phone"
         //        email.attributedPlaceholder = NSAttributedString(
         //            string: email.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        email.textColor = .black
+        email.textColor = .Pallete.black
         email.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         email.layer.borderWidth = 0.5
         email.layer.borderColor = UIColor.lightGray.cgColor
@@ -96,7 +96,7 @@ class LogInViewController: UIViewController {
         password.placeholder = "Password"
         //        password.attributedPlaceholder = NSAttributedString(
         //            string: password.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        password.textColor = UIColor.black
+        password.textColor = .Pallete.black
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.isSecureTextEntry = true
         password.layer.borderWidth = 0.5
@@ -130,7 +130,7 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.Pallete.white
         navigationController?.navigationBar.isHidden = true
         
         
@@ -214,7 +214,7 @@ class LogInViewController: UIViewController {
         guard let email = email.text else { return }
         guard let password = password.text else { return }
         
-         let user = RealmManager.manager.login(email: email, password: password)
+        let user = RealmManager.manager.login(email: email, password: password)
         
         coordinator?.pushProfileViewController(verifiedUser: User(
             login: user.email,
@@ -223,28 +223,28 @@ class LogInViewController: UIViewController {
             avatar: UIImage(named: "avatar")!
         ))
         
-//        delegate = LoginInspector()
-//        delegate?.checkCredentials(email: email, password: password) {[weak self] authDataResult, error in
-//            if let user = authDataResult?.user {
-//                self?.coordinator?.pushProfileViewController(verifiedUser: User(
-//                    login: user.email!,
-//                    fullName: user.email!,
-//                    status: user.uid,
-//                    avatar: UIImage(named: "avatar")!))
-//            }
-//            if let error = error {
-//                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-//                let action = UIAlertAction(title: "ok", style: .cancel)
-//                alert.addAction(action)
-//                self?.navigationController?.present(alert, animated: true)
-//            }
-//        }
-//
-//
-//
-//
-//
-//        //        let viewModel = LoginViewModel()
+        //        delegate = LoginInspector()
+        //        delegate?.checkCredentials(email: email, password: password) {[weak self] authDataResult, error in
+        //            if let user = authDataResult?.user {
+        //                self?.coordinator?.pushProfileViewController(verifiedUser: User(
+        //                    login: user.email!,
+        //                    fullName: user.email!,
+        //                    status: user.uid,
+        //                    avatar: UIImage(named: "avatar")!))
+        //            }
+        //            if let error = error {
+        //                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        //                let action = UIAlertAction(title: "ok", style: .cancel)
+        //                alert.addAction(action)
+        //                self?.navigationController?.present(alert, animated: true)
+        //            }
+        //        }
+        //
+        //
+        //
+        //
+        //
+        //        //        let viewModel = LoginViewModel()
         //
         //        switch viewModel.check(email: email, password: password) {
         //        case .usererror:
@@ -294,26 +294,26 @@ class LogInViewController: UIViewController {
         RealmManager.manager.printCount()
         RealmManager.manager.delete(email: email, password: password)
         RealmManager.manager.printCount()
-
-
-/*
-        delegate = LoginInspector()
-        delegate?.signUp(email: email, password: password) {[weak self] authDataResult, error in
-            if let user = authDataResult?.user {
-                self?.coordinator?.pushProfileViewController(verifiedUser: User(
-                    login: user.email!,
-                    fullName: user.email!,
-                    status: user.uid,
-                    avatar: UIImage(named: "avatar")!))
-            }
-            if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "ok", style: .cancel)
-                alert.addAction(action)
-                self?.navigationController?.present(alert, animated: true)
-            }
-        }
-        */
+        
+        
+        /*
+         delegate = LoginInspector()
+         delegate?.signUp(email: email, password: password) {[weak self] authDataResult, error in
+         if let user = authDataResult?.user {
+         self?.coordinator?.pushProfileViewController(verifiedUser: User(
+         login: user.email!,
+         fullName: user.email!,
+         status: user.uid,
+         avatar: UIImage(named: "avatar")!))
+         }
+         if let error = error {
+         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+         let action = UIAlertAction(title: "ok", style: .cancel)
+         alert.addAction(action)
+         self?.navigationController?.present(alert, animated: true)
+         }
+         }
+         */
     }
     
     @objc private func keyboardShow(notification: NSNotification) {

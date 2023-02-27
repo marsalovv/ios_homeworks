@@ -7,6 +7,7 @@ class PhotosViewController: UIViewController {
     //MARK: - Data
     
     private let imagePF = ImagePublisherFacade()
+    
     private var images: [UIImage] = []
     
     private lazy var collectionview: UICollectionView = {
@@ -26,11 +27,15 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionview)
-        view.backgroundColor = .white
+        view.backgroundColor = .Pallete.white
+        collectionview.backgroundColor = .Pallete.white
+        
         
         navigationItem.title = "Photo gallery"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         
+        
+        //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.Pallete.white]
+        //
         setupConstrayns()
         
         imagePF.subscribe(self)
