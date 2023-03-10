@@ -2,7 +2,8 @@
 struct MyLoginFactory: LoginFactory {
     
     func makeLoginInspector() -> LoginInspector {
-        LoginInspector()
+        let loginInspector = LoginInspector()
+        return loginInspector
     }
     
 }

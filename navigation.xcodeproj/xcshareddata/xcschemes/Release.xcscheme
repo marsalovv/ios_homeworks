@@ -39,6 +39,17 @@
                ReferencedContainer = "container:navigation.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "69C5807A29B6035300166F0D"
+               BuildableName = "navigationTests.xctest"
+               BlueprintName = "navigationTests"
+               ReferencedContainer = "container:navigation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

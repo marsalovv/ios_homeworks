@@ -34,8 +34,10 @@ class FeedViewController: UIViewController {
         btn.action = { [weak self] in
             guard self?.wordTextField.text?.isEmpty == false else { return }
             guard let word = self?.wordTextField.text else {return}
-            
-            self?.Result.backgroundColor = FeedViewModel.shared.check(word: word) ? .green : .red
+            let feedModel = FeedModel()
+            let feedViewModel = FeedViewModel(model: feedModel)
+            let result = feedViewModel.check(word: word)
+            self?.Result.backgroundColor = result ? .green : .red
         }
         
         return btn

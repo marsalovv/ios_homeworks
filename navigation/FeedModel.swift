@@ -1,11 +1,11 @@
 
 struct FeedModel {
+    let secretWord: String
     
-//    static let shared = FeedModel()
-    
-     let secretWord = "курица"
-//
-//    func check(word: String) -> Bool{
-//        word == secretWord ? true : false
-//    }
+    init(secretWord: String = "курица") {
+        self.secretWord = secretWord
+    }
 }
+
+
+

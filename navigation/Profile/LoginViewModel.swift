@@ -9,13 +9,18 @@ protocol LoginViewModuleProtocol {
 class LoginViewModel: LoginViewModuleProtocol {
     
     var user: User?
-    
+    private let factory: MyLoginFactory
     
     enum UserVerification {
         case usererror
         case passwordError
         case successfully
     }
+    
+    init(factory: MyLoginFactory) {
+        self.factory = factory
+    }
+
     
     func check(email: String, password: String) -> UserVerification {
 #if DEBUG
@@ -25,11 +30,12 @@ class LoginViewModel: LoginViewModuleProtocol {
 #endif
         guard let verifiedUser = currentUser.checkingCorrectnessOfLogin(login: email) else { return .usererror }
         
-        let factory = MyLoginFactory()
+
         let loginDelegate = factory.makeLoginInspector()
         guard loginDelegate.check(login: email, password: password) == true else { return .passwordError }
         
         user = verifiedUser
         return .successfully
     }
+    
 }
