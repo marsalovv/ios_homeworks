@@ -51,7 +51,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var createButton: CustomButton = {
-        let btn = CustomButton(title: "Регистрация", TitleColor: .systemCyan)
+        let btn = CustomButton(title: "Войти по FaceID", TitleColor: .systemCyan)
         btn.backgroundColor = .systemFill
         btn.setTitle("...", for: .disabled)
         btn.isEnabled = false
@@ -289,12 +289,22 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func pressCreateButton() {
-        guard let email = email.text else { return }
-        guard let password = password.text else { return }
-        RealmManager.manager.printCount()
-        RealmManager.manager.delete(email: email, password: password)
-        RealmManager.manager.printCount()
+        let authorizationService = LocalAuthorizationService()
+        authorizationService.authorizeIfPossible() {reply in
+            DispatchQueue.main.async {
+                if reply {
+                    let user = User(login: "angoric@angoric.com", fullName: "Angoric", status: "Я авторизовался по FaceID!", avatar: UIImage(named: "avatar")!)
+                    self.coordinator?.pushProfileViewController(verifiedUser: user)
+                }
+            }
+        }
         
+        //        guard let email = email.text else { return }
+        //        guard let password = password.text else { return }
+        //        RealmManager.manager.printCount()
+        //        RealmManager.manager.delete(email: email, password: password)
+        //        RealmManager.manager.printCount()
+        //
         
         /*
          delegate = LoginInspector()

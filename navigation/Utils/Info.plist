@@ -25,5 +25,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Это нужно для удобной аутентификации</string>
 </dict>
 </plist>

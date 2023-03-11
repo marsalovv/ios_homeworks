@@ -45,6 +45,7 @@
 		698D43D2291D45000050AF3C /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D43D1291D45000050AF3C /* TestUserService.swift */; };
 		698F60D82943558B005E419E /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F60D72943558B005E419E /* MyTabBar.swift */; };
 		698F60DC2944D597005E419E /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F60DB2944D597005E419E /* FeedViewModel.swift */; };
+		699121FF29BC95DF002456B0 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699121FE29BC95DF002456B0 /* LocalAuthorizationService.swift */; };
 		69964E23291C046800A82A96 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69964E22291C046800A82A96 /* User.swift */; };
 		69964E25291C05BD00A82A96 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69964E24291C05BD00A82A96 /* UserServiceProtocol.swift */; };
 		69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69964E26291C073500A82A96 /* CurrentUserService.swift */; };
@@ -140,6 +141,7 @@
 		698D43D1291D45000050AF3C /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		698F60D72943558B005E419E /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
 		698F60DB2944D597005E419E /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		699121FE29BC95DF002456B0 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		69964E22291C046800A82A96 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		69964E24291C05BD00A82A96 /* UserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceProtocol.swift; sourceTree = "<group>"; };
 		69964E26291C073500A82A96 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				696B176129829DFF00D0EF3E /* FavoritesTableViewController.swift */,
+				699121FD29BC959D002456B0 /* FaceID */,
 				699D9CC529ACF3B6004B09EE /* DarkTheme */,
 				695F6E3029A4C33F00B5837D /* Localizable */,
 				695F6E2C29A3709500B5837D /* Map */,
@@ -362,6 +365,14 @@
 				6941F945296D97A300A7D60C /* GoogleService-Info.plist */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		699121FD29BC959D002456B0 /* FaceID */ = {
+			isa = PBXGroup;
+			children = (
+				699121FE29BC95DF002456B0 /* LocalAuthorizationService.swift */,
+			);
+			path = FaceID;
 			sourceTree = "<group>";
 		};
 		699D9CC529ACF3B6004B09EE /* DarkTheme */ = {
@@ -673,6 +684,7 @@
 				69964E27291C073500A82A96 /* CurrentUserService.swift in Sources */,
 				696B17642982A35700D0EF3E /* TitleModel.swift in Sources */,
 				69E0F0B8292271F000C89071 /* LoginFactory.swift in Sources */,
+				699121FF29BC95DF002456B0 /* LocalAuthorizationService.swift in Sources */,
 				695F6E2E29A370B200B5837D /* MapViewController.swift in Sources */,
 				698F60D82943558B005E419E /* MyTabBar.swift in Sources */,
 				6958780B292BD70C007CF184 /* CustomButton.swift in Sources */,

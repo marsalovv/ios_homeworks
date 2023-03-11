@@ -18,9 +18,6 @@ let tab = TabCoordinator(navCon)
         tab.start()
         window?.rootViewController = navCon
         window?.makeKeyAndVisible()
-        
-        //networkService()
-
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
