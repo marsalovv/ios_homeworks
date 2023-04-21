@@ -1,0 +1,15 @@
+//FeedViewController
+"title FeedVC" = "Лента";
+"FeedVC wordTextField" = "Введите слово";
+"FeedVC openPostButton" = "Открыть пост";
+"FeedVC checkGuessButton" = "Проверить";
+//FavoritesTableViewController
+"title FavoritesTVC" = "Избранное";
+"FavoritesTVC rightBarButtonItem" = "Фильтр";
+"FavoritesTVC leftBarButtonItem" = "Показать все";
+//MapViewController
+"title MapVC" = "карта";
+"MapVC currentLocationAnnotation" = "Вы здесь";
+//LoginViewController
+"title LoginVC" = "Аккаунт";
+"LoginVC loginButton" = "Войти";

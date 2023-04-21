@@ -5,9 +5,10 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Data
     
+    
     private lazy var castomView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .Pallete.white
         view.alpha = 0.0
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -18,7 +19,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         button.alpha = 0.0
-        //button.backgroundColor = .yellow
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(closeImageAction), for: .touchUpInside)
@@ -28,11 +28,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var avatarImage: UIImageView = {
         let avatar = UIImageView()
-        avatar.image = UIImage(named: "avatar.jpg")
+        avatar.image = UIImage()
         avatar.clipsToBounds = true
         avatar.layer.cornerRadius = 50
         avatar.layer.borderWidth = 3
-        avatar.layer.borderColor = UIColor.white.cgColor
+        avatar.layer.borderColor = UIColor.lightGray.cgColor
         avatar.isAccessibilityElement = true
         avatar.accessibilityLabel = "avatar"
         avatar.isUserInteractionEnabled = true
@@ -43,9 +43,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var  nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Angoric"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.textColor = .Pallete.black
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -53,18 +52,21 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
-        status.text = "У меня лапки!"
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        status.textColor = UIColor.gray
-        status.backgroundColor = .white
+        status.textColor = .Pallete.black
+        status.backgroundColor = .systemFill
         status.translatesAutoresizingMaskIntoConstraints = false
         
         return status
     }()
     
-    private lazy var button :UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Show status", for: .normal)
+    private lazy var button :CustomButton = {
+        let btn = CustomButton(title: "Show status", TitleColor: .white)
+        btn.action = { [weak self] in
+            guard let status = self?.statusLabel.text else { return }
+            print(status)
+        }
+        
         btn.backgroundColor = .systemBlue
         btn.layer.cornerRadius = 14
         btn.layer.shadowRadius = 4
@@ -72,8 +74,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         btn.layer.shadowOffset.height = 4
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.7
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(printStatus), for: .touchUpInside)
         
         return btn
     }()
@@ -81,7 +81,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        textField.textColor = UIColor.black
+        textField.textColor = .Pallete.black
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.layer.cornerRadius = 12.0
         textField.layer.borderWidth = 1.0
@@ -96,20 +96,25 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var imageBounds = avatarImage.layer.bounds
     
     //MARK: - Init
-
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: nil)
         setupView()
         setupConstrains()
         setupGesture()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
     //MARK: - Setup view
     
+    func setupViewCurrendUser(user: User) {
+        self.avatarImage.image = user.avatar
+        self.nameLabel.text = user.fullName
+        self.statusLabel.text = user.status
+    }
     private func setupView() {
         [castomView, closeImageButton, button, statusLabel, avatarImage, statusTextField, nameLabel].forEach {addSubview($0)}
     }
@@ -160,9 +165,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func animateAvatar() {
-         imagePosition = avatarImage.layer.position
-         imageBounds = avatarImage.layer.bounds
-    
+        imagePosition = avatarImage.layer.position
+        imageBounds = avatarImage.layer.bounds
+        
         let centerScreen = UIScreen.main.bounds.height / 2  - avatarImage.bounds.height
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) { [self] in
             castomView.alpha = 0.7
@@ -190,7 +195,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             self.statusLabel.alpha = 1
             self.statusTextField.alpha = 1
             self.button.alpha = 1
-
+            
             self.avatarImage.layer.position = self.imagePosition
             self.avatarImage.layer.bounds = self.imageBounds
             self.avatarImage.layer.cornerRadius = self.avatarImage.bounds.width / 2
@@ -201,11 +206,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Actions
     
-    @objc private func printStatus() {
-        if let text = statusLabel.text {
-            print(text)
-        }
-    }
     
     @objc private func statusTextChanged() {
         if let text = statusTextField.text {

@@ -7,7 +7,9 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Data
     
-    let postsArray = Post.getPostsArray()
+    var coordinator: ProfileCoordinator?
+    let postsArray = Post.makePostsArray()
+    var user: User
     private lazy var profileHV: ProfileHeaderView = {
         let profileHV = ProfileHeaderView()
         profileHV.translatesAutoresizingMaskIntoConstraints = false
@@ -27,16 +29,28 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+
+    }
+    
+    
     //MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        #if DEBUG
-        self.view.backgroundColor = .systemRed
-        #else
-        self.view.backgroundColor = .systemGreen
-        #endif
-        
+//        #if DEBUG
+//        self.view.backgroundColor = .systemRed
+//        #else
+//        self.view.backgroundColor = .systemGreen
+//        #endif
+//
+        view.backgroundColor = .Pallete.white
         self.view.addSubview(tableView)
 
         setupConstrains()
@@ -80,7 +94,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         default :
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostTableViewCell
-            cell.setupCell(postsArray[indexPath.row])
+            let post = postsArray[indexPath.row]
+            cell.action = {
+                CoreDataManager.manager.addFavorites(post: post)
+            }
+            cell.setupCell(post)
+
             return cell
         }
         
@@ -93,6 +112,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let header = ProfileHeaderView()
+                         header.setupViewCurrendUser(user: user)
+            
             return header
         } else {
             return nil
@@ -112,5 +133,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             let photoGallery = PhotosViewController()
             navigationController?.pushViewController(photoGallery, animated: true)
         }
+    
     }
+    
+
+    
 }

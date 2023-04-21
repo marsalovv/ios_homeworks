@@ -8,7 +8,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var label: UILabel = {
         let label = UILabel()
         label.text = "Photo"
-        label.textColor = .black
+        label.textColor = .Pallete.black
         label.backgroundColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.isAccessibilityElement = true
@@ -25,7 +25,7 @@ class PhotosTableViewCell: UITableViewCell {
         
         return arrow
     }()
-
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         

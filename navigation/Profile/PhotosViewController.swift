@@ -1,10 +1,14 @@
 
-
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     //MARK: - Data
+    
+    private let imagePF = ImagePublisherFacade()
+    
+    private var images: [UIImage] = []
     
     private lazy var collectionview: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -19,24 +23,34 @@ class PhotosViewController: UIViewController {
     }()
     
     //Mark: - Life Cyckle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionview)
-        view.backgroundColor = .white
+        view.backgroundColor = .Pallete.white
+        collectionview.backgroundColor = .Pallete.white
+        
         
         navigationItem.title = "Photo gallery"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         
+        
+        //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.Pallete.white]
+        //
         setupConstrayns()
+        
+        imagePF.subscribe(self)
+        imagePF.addImagesWithTimer(time: 0.3, repeat: 20)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
+        
+        imagePF.removeSubscription(for: self)
+        imagePF.rechargeImageLibrary()
     }
     
     //MARK: - Private
@@ -56,16 +70,20 @@ class PhotosViewController: UIViewController {
 //MARK: - Extension
 
 extension PhotosViewController: UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionViewCell", for: indexPath) as! PhotosCollectionViewCell
-        cell.photo.image = UIImage(named: "\(indexPath.item)")
-        cell.photo.accessibilityLabel = "Изображение номер \(indexPath.row + 1)"
+        //cell.photo.image = UIImage(named: "\(indexPath.item)")
+        cell.photo.image = images[indexPath.item]
+        if images[indexPath.item].accessibilityLabel?.isEmpty == true {
+            cell.photo.accessibilityLabel = "Изображение номер \(indexPath.row + 1)"
+        }
+        
         return cell
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        images.count
     }
 }
 
@@ -90,3 +108,13 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
 }
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        self.images = images
+        collectionview.reloadData()
+    }
+    
+}
+
